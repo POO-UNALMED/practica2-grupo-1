@@ -6,17 +6,39 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class Cursor implements EventHandler<MouseEvent> {
-
-    Inicio control;
-
+    
+    static int noFoto = 1;
+    
     @Override
     public void handle(MouseEvent m) {
-        control = new Inicio();
-        Object comando = m;
-        if (!(comando instanceof ImageView)) {
-            control.imageP4 = new Image(getClass().getResourceAsStream("darla.jpg"));
-            control.marcoP4.setImage(control.imageP4);
-            control.p4.getChildren().add(control.marcoP4);
+        
+        ImageView comandoIm = (ImageView)m.getSource();
+        
+        if ((comandoIm instanceof ImageView)) {
+            
+            Image imagen;
+            if(noFoto==1){
+                imagen = new Image(getClass().getResourceAsStream("2.jpg"));
+                noFoto = 3;
+            }
+            else if(noFoto<6){
+                imagen = new Image(getClass().getResourceAsStream(Integer.toString(noFoto) + ".jpg"));
+                noFoto++;
+            }
+            else{
+                noFoto = 1;
+                imagen = new Image(getClass().getResourceAsStream("1.jpg"));
+                noFoto++;
+            }
+            
+            ImageView marcoNuevo = new ImageView(imagen);
+            marcoNuevo.setFitHeight(Inicio.altoGrid - 30);
+            marcoNuevo.setFitWidth(Inicio.anchoGrid);     
+            Inicio.marcoP4 = marcoNuevo;
+            Inicio.marcoP4.setImage(imagen);
+            Inicio.marcoP4.setOnMouseExited(Inicio.cursorHandler);
+            Inicio.p4.getChildren().clear();
+            Inicio.p4.getChildren().addAll(Inicio.marcoP4,Inicio.bInicio);
         }
 
     }

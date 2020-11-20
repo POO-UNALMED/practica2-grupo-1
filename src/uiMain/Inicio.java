@@ -109,12 +109,12 @@ public class Inicio {
         p4.setAlignment(Pos.CENTER);
 
         marcoP4 = new ImageView();
-        imageP4 = new Image(getClass().getResourceAsStream("yo.jpg"));
+        imageP4 = new Image(getClass().getResourceAsStream("1.jpg"));
         marcoP4 = new ImageView(imageP4);
 
         marcoP4.setFitHeight(altoGrid - 30);
         marcoP4.setFitWidth(anchoGrid);
-        marcoP4.setOnMouseClicked(cursorHandler);
+        marcoP4.setOnMouseExited(cursorHandler);
         bInicio = new Button("Inicio");
         bInicio.setOnAction(botonHandler);
 

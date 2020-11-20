@@ -24,25 +24,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 
-public class MenuApp{
-
-    //Objetos Generales
-    Scene scena;
-    Stage window;
-
-    public MenuApp(){
-        //Proyeccion
-        Label lb = new Label("Page1");
-        GridPane grid2 = new GridPane();
-        window = new Stage();
-        window.setTitle("  SAM-TRAVEL v.01");
-        Button b1 = new Button("OK");
-        grid2.getChildren().setAll(b1);
-        scena = new Scene(grid2,200,200);
-    }
+public class Main extends Application {
     
-    public Scene getEscena(){
-        return scena;
+    static Stage window;
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        window = new Stage();
+        window.setScene(new Inicio().getEscena());
+        window.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
 }

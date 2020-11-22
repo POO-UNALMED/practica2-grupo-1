@@ -27,7 +27,6 @@ import javafx.scene.layout.BorderPane;
 public class Inicio {
 
     //Objetos Generales
-    static Stage window;
     static Scene scena;
     static MenuApp menuApp;
     static Presion botonHandler;
@@ -75,7 +74,7 @@ public class Inicio {
         
         
         //CONSTANTES;
-        ancho = 500;
+        ancho = 600;
         alto = 600;
         insets = 10;
         anchoGrid = (ancho / 2) - 2 * insets;
@@ -93,11 +92,13 @@ public class Inicio {
         menuDescripcion.setOnAction(botonHandler);
 
         //Objetos P3
-        saludo = "Un texto es una composición de signos codificados en un sistema de escritura que forma una unidad de sentido. También es una composición de caracteres imprimibles generados por un algoritmo de cifrado que, aunque no tienen sentido para cualquier persona, sí puede ser descifrado por su destinatario original.";
+        saludo = "Saludo";
         descripcion = "Descripcion";
 
         p3 = new VBox(20);
         txt1 = new TextArea(saludo);
+        txt1.setWrapText(true);
+        txt1.setEditable(false);
 
         txt1.setPrefSize(anchoGrid, altoGrid);
 
@@ -125,14 +126,13 @@ public class Inicio {
         b2 = new Button("Fotos");
         p5 = new VBox(20);
         txt2 = new TextArea(cv);
-        txt2.setPrefSize((ancho / 2) - 2 * insets, (alto / 2) - 2 * insets);
+        txt2.setPrefSize(anchoGrid, altoGrid);
         p5.getChildren().addAll(txt2);
 
         //Objetos P6
         
         //Caracteristicas P1
         GridPane p1 = new GridPane();
-
         p1.setVgap(20);
         p1.setPrefSize(altoGrid, anchoGrid);
         p1.setPadding(new Insets(insets));
@@ -156,8 +156,8 @@ public class Inicio {
     }
 
     public static void setEscena(Scene s) {
-        window.setScene(s);
-        window.show();
+        Main.window.setScene(s);
+        Main.window.show();
     }
 
     public static Scene getEscena() {
@@ -165,7 +165,7 @@ public class Inicio {
     }
     
     public static void cerrar(){
-        window.close();
+        Main.window.close();
     }
 
 }

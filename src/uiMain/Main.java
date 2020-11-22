@@ -27,10 +27,12 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
     
     static Stage window;
+    public static Inicio inicho;
     
     @Override
     public void start(Stage stage) throws Exception {
         window = new Stage();
+        window.setTitle("SAM-TRAVEL");
         window.setScene(new Inicio().getEscena());
         window.show();
     }

@@ -4,6 +4,8 @@ import gestorAplicacion.persons.Persona;
 import gestorAplicacion.persons.Viajero;
 import java.util.*;
 import java.util.Map.Entry;
+import uiMain.Main;
+import uiMain.Texto;
 
 public class Agente extends Persona {
 
@@ -22,17 +24,17 @@ public class Agente extends Persona {
     //METODOS HEREDADOS ABSTRACT
     //Métodos heredados de Persona
     @Override
-    public void obtenerVisado(){
+    public void obtenerVisado() {
         this.setVisado(true);
     }
-    
+
     @Override
-    public void retirarse(){
+    public void retirarse() {
         listaAgentes.remove(this);
     }
-    
+
     //MÉTODOS
-    public void atenderCliente(Viajero viajero){
+    public void atenderCliente(Viajero viajero) {
         this.listaClientes.add(viajero);
     }
 
@@ -64,13 +66,18 @@ public class Agente extends Persona {
 
     public static Agente agenteAleatorio() {
         Agente agenteAsignado = Agente.getListaAgentes().get(0);
-        int numeroAleatorio = (int) Math.floor(Math.random()*Agente.numeroAgentes());
+        int numeroAleatorio = (int) Math.floor(Math.random() * Agente.numeroAgentes());
         agenteAsignado = Agente.getListaAgentes().get(numeroAleatorio);
         return agenteAsignado;
     }
-    
-    public static int numeroAgentes(){
+
+    public static int numeroAgentes() {
         return Agente.getListaAgentes().size();
+    }
+
+    public String imprimirDatos() {
+        String txt = Main.t.imprimirAgente(this);
+        return txt;
     }
 
     public static List<Entry<String, Integer>> mejoresAgentes() {
@@ -89,41 +96,40 @@ public class Agente extends Persona {
 
         return list;
     }
-    
-    public static Agente existeAgente(int cedula){
-        for(Agente agente : listaAgentes){
-            if(agente.getCedula() == (cedula)){
+
+    public static Agente existeAgente(int cedula) {
+        for (Agente agente : listaAgentes) {
+            if (agente.getCedula() == (cedula)) {
                 return agente;
             }
         }
         return null;
     }
-    
+
     public static double comision(String nombre) {
-    	for (Agente agente : listaAgentes) {
-			if(agente.getNombre().equals(nombre)) {
-				
-				return agente.getComision();				
-			}
-		}
-    	return 0;
+        for (Agente agente : listaAgentes) {
+            if (agente.getNombre().equals(nombre)) {
+
+                return agente.getComision();
+            }
+        }
+        return 0;
     }
-    
+
     public static boolean buscarCedula(int cedula) {
-    	for (Agente agente : listaAgentes) {
-			if(agente.getCedula() == cedula) {
-				return true;
-			}
-		}
-    	return false;
+        for (Agente agente : listaAgentes) {
+            if (agente.getCedula() == cedula) {
+                return true;
+            }
+        }
+        return false;
     }
-    
-    public void comisionar(int total){
-        setComision((int)(total*pComision));
+
+    public void comisionar(int total) {
+        setComision((int) (total * pComision));
     }
 
     // GETTERS AND SETTERS
-
     public int getComision() {
         return comision;
     }
@@ -147,6 +153,5 @@ public class Agente extends Persona {
     public static void setListaAgentes(ArrayList<Agente> listaAgentes) {
         Agente.listaAgentes = listaAgentes;
     }
-    
 
 }

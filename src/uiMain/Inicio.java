@@ -23,6 +23,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
+import static uiMain.Main.alto;
+import static uiMain.Main.altoGrid;
+import static uiMain.Main.ancho;
+import static uiMain.Main.anchoGrid;
+import static uiMain.Main.insets;
 
 public class Inicio {
 
@@ -31,13 +36,6 @@ public class Inicio {
     static MenuApp menuApp;
     static Presion botonHandler;
     static Cursor cursorHandler;
-
-    //Constantes
-    static int ancho;
-    static int alto;
-    static int insets;
-    static int anchoGrid;
-    static int altoGrid;
 
     //Objetos Barra
     static MenuBar menuBar;
@@ -72,14 +70,14 @@ public class Inicio {
         botonHandler = new Presion();
         cursorHandler = new Cursor();
         
-        
         //CONSTANTES;
         ancho = 600;
         alto = 600;
         insets = 10;
         anchoGrid = (ancho / 2) - 2 * insets;
         altoGrid = (alto / 2) - 2 * insets;
-
+        
+        
         //BARRA DE MENU
         menuBar = new MenuBar();
         menu1 = new Menu("Inicio");
@@ -92,7 +90,7 @@ public class Inicio {
         menuDescripcion.setOnAction(botonHandler);
 
         //Objetos P3
-        saludo = "Saludo";
+        saludo = Main.t.presentacion();
         descripcion = "Descripcion";
 
         p3 = new VBox(20);
@@ -135,13 +133,13 @@ public class Inicio {
         GridPane p1 = new GridPane();
         p1.setVgap(20);
         p1.setPrefSize(altoGrid, anchoGrid);
-        p1.setPadding(new Insets(insets));
+        p1.setPadding(new Insets(Main.insets));
         p1.add(p3, 0, 0);
         p1.add(p4, 0, 1);
 
         //Caracteristicas P2
         GridPane p2 = new GridPane();
-        p2.setPadding(new Insets(insets));
+        p2.setPadding(new Insets(Main.insets));
         p2.add(p5, 0, 0);
         p2.add(b2, 0, 1);
 

@@ -32,8 +32,8 @@ public class Cursor implements EventHandler<MouseEvent> {
             }
             
             ImageView marcoNuevo = new ImageView(imagen);
-            marcoNuevo.setFitHeight(Inicio.altoGrid - 30);
-            marcoNuevo.setFitWidth(Inicio.anchoGrid);     
+            marcoNuevo.setFitHeight(Main.altoGrid - 30);
+            marcoNuevo.setFitWidth(Main.anchoGrid);     
             Inicio.marcoP4 = marcoNuevo;
             Inicio.marcoP4.setImage(imagen);
             Inicio.marcoP4.setOnMouseExited(Inicio.cursorHandler);

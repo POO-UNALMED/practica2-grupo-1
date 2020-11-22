@@ -31,9 +31,8 @@ public class MenuApp {
     //Objetos Generales
     static Scene scena;
     static Stage window;
-    
-    static GridPane grid;
-    static HBox cuadro;
+
+    static GridPane opciones;
 
     static MenuBar barraMenu;
     static Menu menuArchivos;
@@ -45,6 +44,11 @@ public class MenuApp {
     static MenuItem comViajeros;
     static MenuItem comAgentes;
     static MenuItem comDestinos;
+    static MenuItem comIntegrantes;
+
+    static Button b1;
+    static Button b2;
+    static Button b3;
 
     static Presion botonHandler;
 
@@ -59,41 +63,55 @@ public class MenuApp {
 
         comSalir = new MenuItem("Inicio");
         comInfo = new MenuItem("Info de Sam-Travel");
-        comSalir.setOnAction(botonHandler);    
+        comSalir.setOnAction(botonHandler);
         comInfo.setOnAction(botonHandler);
         menuArchivos.getItems().addAll(comInfo, comSalir);
-        
+
         comViajeros = new MenuItem("Listado de Viajeros");
         comAgentes = new MenuItem("Listado de Agentes");
-        comDestinos= new MenuItem("Listado de Destinos Turisticos");
+        comDestinos = new MenuItem("Listado de Destinos Turisticos");
         comViajeros.setOnAction(botonHandler);
-        comAgentes.setOnAction(botonHandler); 
-        comDestinos.setOnAction(botonHandler); 
-        
-        menuConsultas.getItems().addAll(comViajeros,comAgentes,comDestinos);
-        
+        comAgentes.setOnAction(botonHandler);
+        comDestinos.setOnAction(botonHandler);
+        menuConsultas.getItems().addAll(comViajeros, comAgentes, comDestinos);
+
+        comIntegrantes = new MenuItem("Integrantes");
+        comIntegrantes.setOnAction(botonHandler);
+        menuAyuda.getItems().addAll(comIntegrantes);
 
         barraMenu = new MenuBar();
         barraMenu.getMenus().addAll(menuArchivos, menuConsultas, menuAyuda);
 
-        window = new Stage();
-        window.setTitle("  SAM-TRAVEL v.01");
+        //IMAGEN LATERAL
+        Image im = new Image(getClass().getResourceAsStream("m.jpg"));
+        ImageView lateral = new ImageView(im);
+        lateral.setFitWidth(400);
 
-        grid= new GridPane();
-        //grid.setAlignment(Pos.CENTER);
+        window = new Stage();
+        window.setTitle("  SAM-TRAVEL v.1.0");
         BorderPane marco = new BorderPane();
 
         //Desde aquí va a depender del argumento de entrada de MenuApp
-        
-        cuadro = new HBox();
-        cuadro.setAlignment(Pos.CENTER);
-        Label l1 = new Label("Dato ");
-        TextField t1 = new TextField();
-        cuadro.getChildren().add(l1);
-        cuadro.getChildren().add(t1);
-        grid.add(cuadro, 0, 0);
+        opciones = new GridPane();
+        opciones.setAlignment(Pos.TOP_CENTER);
+        b1 = new Button("Viajeros");
+        b2 = new Button("Destinos");
+        b3 = new Button("Compra");
+        b1.setMinSize(200, 190);
+        b2.setMinSize(200, 200);
+        b3.setMinSize(200, 200);
+        b1.setOnAction(botonHandler);
+        b2.setOnAction(botonHandler);
+        b3.setOnAction(botonHandler);
+
+        opciones.add(b1, 0, 0);
+        opciones.add(b2, 0, 1);
+        opciones.add(b3, 0, 2);
+
+        marco.setPadding(new Insets(0, 0, 10, 0));
         marco.setTop(barraMenu);
-        marco.setCenter(grid);
+        marco.setLeft(lateral);
+        marco.setCenter(opciones);
         scena = new Scene(marco, 600, 600);
     }
 

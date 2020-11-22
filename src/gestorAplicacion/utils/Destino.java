@@ -4,6 +4,7 @@ import gestorAplicacion.persons.Viajero;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import uiMain.Main;
 import uiMain.Texto;
 
 public class Destino {
@@ -44,6 +45,12 @@ public class Destino {
             }
         }
         return destino;
+    }
+    
+    //Imprimir Destinos
+    public String imprimirDatos(){
+        String txt = Main.t.imprimirDestino(this);
+        return txt;
     }
 
     public boolean tieneHoteles() {

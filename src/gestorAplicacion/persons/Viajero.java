@@ -6,6 +6,8 @@ import gestorAplicacion.utils.Tiquete;
 
 
 import java.util.*;
+import uiMain.Main;
+import uiMain.Texto;
 
 public class Viajero extends Persona implements Consumidor {
 
@@ -107,6 +109,12 @@ public class Viajero extends Persona implements Consumidor {
         return destinosPosibles;
     }
     
+    //Imprimir Viajeros
+    public String imprimirDatos(){
+        String txt = Main.t.imprimirViajero(this);
+        return txt;
+    }
+    
     //Verifica si el viajero puede o no permitirse pagar un hotel.
     public boolean puedePagarHotel(Destino d) {
         ArrayList<Hotel> hoteles = d.getHoteles();
@@ -122,6 +130,7 @@ public class Viajero extends Persona implements Consumidor {
             return true;
         }
     }
+    
     //Se llama este método cuando se quiere saber si cumple el requisito para sacar pasaporte.
     //Este requisito es que el viajero haya realizado por lo menos un viaje.
     public boolean haViajado() {

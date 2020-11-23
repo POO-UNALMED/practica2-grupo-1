@@ -1,5 +1,6 @@
 package uiMain;
 
+import uiMain.eventos.Presion;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -29,28 +30,29 @@ import javafx.scene.layout.HBox;
 public class MenuApp {
 
     //Objetos Generales
-    static Scene scena;
-    static Stage window;
+    public static Scene scena;
+    public static Stage window;
+    public static BorderPane marco;
 
-    static GridPane opciones;
+    public static GridPane opciones;
 
-    static MenuBar barraMenu;
-    static Menu menuArchivos;
-    static Menu menuConsultas;
-    static Menu menuAyuda;
+    public static MenuBar barraMenu;
+    public static Menu menuArchivos;
+    public static Menu menuConsultas;
+    public static Menu menuAyuda;
 
-    static MenuItem comSalir;
-    static MenuItem comInfo;
-    static MenuItem comViajeros;
-    static MenuItem comAgentes;
-    static MenuItem comDestinos;
-    static MenuItem comIntegrantes;
+    public static MenuItem comSalir;
+    public static MenuItem comInfo;
+    public static MenuItem comViajeros;
+    public static MenuItem comAgentes;
+    public static MenuItem comDestinos;
+    public static MenuItem comIntegrantes;
 
-    static Button b1;
-    static Button b2;
-    static Button b3;
+    public static Button b1;
+    public static Button b2;
+    public static Button b3;
 
-    static Presion botonHandler;
+    public static Presion botonHandler;
 
     public MenuApp() {
 
@@ -83,13 +85,11 @@ public class MenuApp {
         barraMenu.getMenus().addAll(menuArchivos, menuConsultas, menuAyuda);
 
         //IMAGEN LATERAL
-        Image im = new Image(getClass().getResourceAsStream("m.jpg"));
+        Image im = new Image("BaseDatos/m.jpg");
         ImageView lateral = new ImageView(im);
         lateral.setFitWidth(400);
 
-        window = new Stage();
-        window.setTitle("  SAM-TRAVEL v.1.0");
-        BorderPane marco = new BorderPane();
+        marco = new BorderPane();
 
         //Desde aquí va a depender del argumento de entrada de MenuApp
         opciones = new GridPane();

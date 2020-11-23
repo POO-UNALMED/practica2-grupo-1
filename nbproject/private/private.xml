@@ -5,13 +5,15 @@
         <group>
             <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/gestorAplicacion/persons/Viajero.java</file>
             <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/gestorAplicacion/persons/Agente.java</file>
+            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/eventos/Presion.java</file>
             <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/Main.java</file>
             <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/gestorAplicacion/utils/Destino.java</file>
-            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/Presion.java</file>
             <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/Texto.java</file>
-            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/Inicio.java</file>
             <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/MenuApp.java</file>
-            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/Cursor.java</file>
+            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/eventos/Cursor.java</file>
+            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/ventanas/MenuViajero.java</file>
+            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/utils/FieldPane.java</file>
+            <file>file:/C:/Users/marx1/OneDrive/Documentos/GitHub/practica2-grupo-1/src/uiMain/Start.java</file>
         </group>
     </open-files>
 </project-private>

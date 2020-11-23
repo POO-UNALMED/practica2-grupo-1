@@ -31,28 +31,43 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
-    
-    static Stage window;
-    public static Inicio inicho;
+
+    public static Stage window;
+    public static Start inicho;
     public static Texto t;
-    
+
     //Constantes
-    static int ancho;
-    static int alto;
-    static int insets;
-    static int anchoGrid;
-    static int altoGrid;
-    
+    public static int ancho;
+    public static int alto;
+    public static int insets;
+    public static int anchoGrid;
+    public static int altoGrid;
+
     @Override
     public void start(Stage stage) throws Exception {
-        
+
+        //Inicialización de GUI
+        Start Inicio = new Start();
+        window = new Stage();
+        window.setTitle("SAM-TRAVEL v 1.0");
+        window.setScene(new Start().getEscena());
+        window.show();
+    }
+
+    public static void main(String[] args) {
+        cargarInstancias();
+        t = new Texto();
+        launch(args);
+    }
+
+    public static void cargarInstancias() {
         //CONSTANTES;
         ancho = 600;
         alto = 600;
         insets = 10;
-        anchoGrid = (ancho / 2) - 2 * insets;
-        altoGrid = (alto / 2) - 2 * insets;
-        
+        anchoGrid = (ancho / 2) - 20;
+        altoGrid = (alto / 2) - 40;
+
         //INSTANCIAS DE AGENTE
         Agente agenteSupremo = new Agente(10, "SAM", true);
         Agente agente1 = new Agente(11, "Bustamante", true);
@@ -129,18 +144,6 @@ public class Main extends Application {
         Tiquete tiquete8 = new Tiquete(viajero6, transporte8, hotel15, 5);
         Tiquete tiquete9 = new Tiquete(viajero8, transporte9, hotel20, 4);
         Tiquete tiquete10 = new Tiquete(viajero9, transporte5, hotel10, 8);
-        
-        
-        //Inicialización de GUI
-        window = new Stage();
-        window.setTitle("SAM-TRAVEL v 1.0");
-        window.setScene(new Inicio().getEscena());
-        window.show();
-    }
-
-    public static void main(String[] args) {
-        t = new Texto();
-        launch(args);
     }
 
 }

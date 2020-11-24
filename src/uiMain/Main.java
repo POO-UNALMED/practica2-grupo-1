@@ -33,7 +33,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 
     public static Stage window;
-    public static Start inicho;
+    public static Start inicio;
     public static Texto t;
 
     //Constantes
@@ -47,10 +47,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         //Inicialización de GUI
-        Start Inicio = new Start();
+        inicio = new Start();
         window = new Stage();
         window.setTitle("SAM-TRAVEL v 1.0");
-        window.setScene(new Start().getEscena());
+        window.setScene(inicio.getEscena());
         window.show();
     }
 

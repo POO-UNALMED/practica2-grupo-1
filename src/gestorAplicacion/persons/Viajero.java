@@ -115,6 +115,23 @@ public class Viajero extends Persona implements Consumidor {
         return txt;
     }
     
+    //Solicitar Visa
+    public Boolean solicitarVisa(){
+        Boolean resp;
+        if(!this.isVisado()){
+            if((this.getPresupuesto()>2500)&&(this.haViajado())){
+                resp = true;
+            }
+            else{
+                resp = false;
+            }
+        }
+        else{
+            resp = true;
+        }
+        return resp;
+    }
+    
     //Verifica si el viajero puede o no permitirse pagar un hotel.
     public boolean puedePagarHotel(Destino d) {
         ArrayList<Hotel> hoteles = d.getHoteles();
@@ -143,7 +160,7 @@ public class Viajero extends Persona implements Consumidor {
     
     //Método que se invoca cuando el viajero quiere redimir millas.
     public void redimirMillas() {
-        this.setPresupuesto(this.presupuesto + this.millas);
+        this.setPresupuesto(this.presupuesto + (this.millas)*10);
         this.setMillas(0);
     }
 

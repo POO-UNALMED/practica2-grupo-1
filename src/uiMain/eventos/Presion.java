@@ -24,7 +24,8 @@ import uiMain.Start;
 import uiMain.Start.*;
 import static uiMain.Start.*;
 import static uiMain.Main.*;
-import uiMain.ventanas.MenuViajero;
+import uiMain.utils.BarraMenu;
+import uiMain.utils.MenuViajero;
 
 public class Presion implements EventHandler<ActionEvent> {
 
@@ -32,6 +33,8 @@ public class Presion implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
         
         Object comando = e.getSource();
+        Object comando2 = e.getSource().getClass();
+        System.out.println(comando2);
         
         if (comando instanceof MenuItem) {
             MenuItem item = (MenuItem) comando;
@@ -40,25 +43,25 @@ public class Presion implements EventHandler<ActionEvent> {
             } else if (item.equals(Start.menuDescripcion) && Start.txt1.getText().equals(Start.saludo)) {
                 Start.txt1.setText(Start.descripcion);
                 Start.menuDescripcion.setText("Saludo");
-            } else if (item.equals(MenuApp.comSalir)) {
+            } else if (item.equals(BarraMenu.comSalir)) {
                 Start nuevoInicio = new Start();
                 Main.window.setScene(nuevoInicio.getEscena());
                 Main.window.show();
-            } else if (item.equals(MenuApp.comInfo)) {
+            } else if (item.equals(BarraMenu.comInfo)) {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle("Informacion");
                 dialog.setHeaderText("Info de Sam-Travel");
                 dialog.showAndWait();
-            } else if (item.equals(MenuApp.comViajeros)) {
+            } else if (item.equals(BarraMenu.comViajeros)) {
                 imprimirViajeros();
 
-            } else if (item.equals(MenuApp.comAgentes)) {
+            } else if (item.equals(BarraMenu.comAgentes)) {
                 imprimirAgentes();
 
-            } else if (item.equals(MenuApp.comDestinos)) {
+            } else if (item.equals(BarraMenu.comDestinos)) {
                 imprimirDestinos();
 
-            } else if (item.equals(MenuApp.comIntegrantes)) {
+            } else if (item.equals(BarraMenu.comIntegrantes)) {
                 imprimirAyuda();
             } else {
                 Start.txt1.setText(Start.saludo);

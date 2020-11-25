@@ -6,6 +6,7 @@ import gestorAplicacion.utils.Destino;
 import gestorAplicacion.utils.Hotel;
 import gestorAplicacion.utils.Tiquete;
 import gestorAplicacion.utils.Transporte;
+import java.util.Map;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -52,10 +53,12 @@ public class Main extends Application {
         window.setTitle("SAM-TRAVEL v 1.0");
         window.setScene(inicio.getEscena());
         window.show();
+
     }
 
     public static void main(String[] args) {
         cargarInstancias();
+        String imp = "";
         t = new Texto();
         launch(args);
     }

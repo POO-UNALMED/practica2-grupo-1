@@ -7,6 +7,8 @@ package uiMain.utils;
 
 import uiMain.utils.BarraMenu;
 import gestorAplicacion.persons.Viajero;
+import gestorAplicacion.utils.Destino;
+import java.util.Map;
 import uiMain.eventos.Presion;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -69,6 +71,7 @@ public class MenuViajero {
     public static Presion botonHandler;
     String[] tituloCriterios;
     String[] tipoCriterios;
+    String imp2;
 
     public MenuViajero() {
 
@@ -84,12 +87,14 @@ public class MenuViajero {
         marco.setCenter(formulario.getGrilla());
         marco.setBottom(botones);
         scena = new Scene(marco, 600, 600);
+        imp2 = "a";
     }
 
     public MenuViajero(Viajero v) {
 
         inicializarDatos();
         actualizar(v);
+        imp2 = "a";
 
         VBox info = new VBox(30);
         info.setAlignment(Pos.TOP_CENTER);
@@ -107,6 +112,7 @@ public class MenuViajero {
         marco.setCenter(info);
         marco.setBottom(marcoIM);
         scena = new Scene(marco, 600, 600);
+
     }
 
     public void inicializarDatos() {
@@ -160,6 +166,7 @@ public class MenuViajero {
         botones2.setAlignment(Pos.CENTER);
 
         bSolicitar.setOnAction(new EventHandler<ActionEvent>() {
+            
             @Override
             public void handle(ActionEvent t) {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
@@ -195,7 +202,7 @@ public class MenuViajero {
                     v.redimirMillas();
                     l1.setText(top + v.imprimirDatos());
                     dialog.setContentText(" ¡REDIMIDO!" + "\n"
-                            + "  Ud ha redimido las Millas de su cuenta "+ "\n"
+                            + "  Ud ha redimido las Millas de su cuenta " + "\n"
                             + "   Nuevo Saldo: " + v.getPresupuesto());
                 }
                 dialog.showAndWait();
@@ -205,10 +212,7 @@ public class MenuViajero {
         bCotizar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-                dialog.setTitle(" SAM-TRAVEL");
-                dialog.setHeaderText(" Cotizar un viaje");
-                dialog.showAndWait();
+                cotizarViaje(v);
             }
         });
 
@@ -225,20 +229,40 @@ public class MenuViajero {
         bRetirar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                v.retirarse();
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle(" SAM-TRAVEL");
-                dialog.setHeaderText(" Retiro del Sistema");
+                dialog.setHeaderText(" Retiro de Usuario ");
+                String retiro = "Sentimos mucho que se retire" +"\n"+
+                        "Hasta luego " + v.getNombre() + ", vuelve pronto.";
+                TextArea t1 = new TextArea(retiro);
+                dialog.getDialogPane().setContent(t1);
                 dialog.showAndWait();
+                
+                //Recargar de la página para mostrar la versión de MenuViajero
+                //Que no tiene asociado un Viajero.
+                MenuViajero mv = new MenuViajero();
+                Main.window.setScene(mv.getEscena());
             }
         });
 
         bConsignar.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent t) {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle(" SAM-TRAVEL");
-                dialog.setHeaderText(" Solicitud de visa");
-                dialog.showAndWait();
+                try {
+                    int consignacion = Integer.parseInt(pozo.getText());
+                    v.consignarDinero(consignacion);
+                    l1.setText(top + v.imprimirDatos());
+                    dialog.setHeaderText(" Consignación Exitosa");
+                    dialog.showAndWait();
+                } catch (Exception e) {
+                    dialog.setHeaderText(" Error en Consignación");
+                    dialog.showAndWait();
+                }
+
             }
         });
     }
@@ -250,5 +274,60 @@ public class MenuViajero {
 
     public Scene getEscena() {
         return scena;
+    }
+
+    public void cotizarViaje(Viajero v) {
+
+        try {
+            String imp = "";
+            imp = imp + (" ") + "\n";
+            imp = imp + ("//---------- COTIZACION DE VIAJES ----------//") + "\n";
+            imp = imp + (" ") + "\n";
+            imp = imp + (" ") + "\n";
+            imp = imp + ("//------- OFERTA DE TRANSPORTE PARA EL VIAJERO " + v.getNombre() + " -------//") + "\n";
+            imp = imp + (" ");
+            imp = imp + (" A continuación se imprimirán todas los posibles tiquetes de transporte que podría comprar el viajero.") + "\n";
+            imp = imp + ("    Esto último a partir de su presupuesto actual de " + v.getPresupuesto() + " pesos.") + "\n";
+            imp = imp + ("") + "\n";
+            imp = imp + ("//--------------------------------------------------------------------------------------") + "\n";
+            imp = imp + (" ") + "\n";
+
+            //Proceso para determinar cuales tiquetes de viaje puede costear el Viajero.
+            Map<Destino, int[]> opcionesTransporte = Destino.esPosibleViajar(v);
+
+            opcionesTransporte.forEach((key, value) -> {
+                String aux = "";
+                if (imp2.equals("a")) {
+                    imp2 = "";
+                }
+                aux = aux + ("//---------------------------------------------") + "\n";
+                aux = aux + ("Destino: " + key.getNombre()) + "\n";
+                for (int i = 0; i < value.length; i++) {
+                    if ((i == 0) && (value[i] != -1)) {
+                        aux = aux + ("    Costo tiquete aereo: " + value[0] + " pesos.") + "\n";
+                    } else if ((i == 1) && (value[i] != -1)) {
+                        aux = aux + ("    Costo tiquete terrestre: " + value[1] + " pesos.") + "\n";
+                    } else if ((i == 2) && (value[i] != -1)) {
+                        aux = aux + ("    Costo tiquete maritimo:  " + value[2] + " pesos.") + "\n";
+                    }
+                }
+                imp2 = imp2 + aux;
+            });
+            imp2 = imp2 + ("//---------------------------------------------") + "\n";
+            imp2 = imp2 + (" ") + "\n";
+
+            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+            TextArea t = new TextArea(imp2);
+            t.setWrapText(true);
+            t.setPrefSize(200, 500);
+            dialog.setHeaderText("Estos son los viajes que se" + "\n" + "puede permitir Viajer@ " + v.getNombre());
+            dialog.getDialogPane().setContent(t);
+            dialog.showAndWait();
+
+        } catch (Exception e) {
+            System.out.println(" ");
+            System.out.println("No hay ningun viajero con la cedula digitada.");
+        }
+
     }
 }

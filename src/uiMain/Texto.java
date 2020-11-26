@@ -148,11 +148,14 @@ public class Texto {
 
     }
 
-    public void imprimirHotel(Hotel h) {
-        System.out.println("//------------------------------");
-        System.out.println("Nombre de Hotel: " + h.getNombre());
-        System.out.println("Costo por noche: " + h.getCosto() + " pesos");
-        System.out.println("Nivel del hotel: " + h.getEstrellas() + " Estrellas.");
+    public String imprimirHotel(Hotel h) {
+        String dato = "";
+        dato = dato + ("//------------------------------") + "\n";
+        dato = dato + ("Nombre de Hotel: " + h.getNombre()) + "\n";
+        dato = dato + ("Costo por noche: " + h.getCosto() + " pesos") + "\n";
+        dato = dato + ("Nivel del hotel: " + h.getEstrellas() + " Estrellas.") + "\n";
+        dato = dato + (" ") + "\n";
+        return dato;
     }
 
     public String imprimirViajero(Viajero v) {
@@ -197,15 +200,29 @@ public class Texto {
     public String imprimirDestino(Destino d) {
         String datos = "";
         String pasaporte;
+        String mar;
+        String tierra;
         if (d.isPideVisa()) {
             pasaporte = " Es necesario pasaporte.";
         } else {
             pasaporte = " No es necesario.";
         }
+        if (d.isAccesoMar()) {
+            mar = " Accesible.";
+        } else {
+            mar = " No es posible.";
+        }
+        if (d.isAccesoTierra()) {
+            tierra = " Accesible.";
+        } else {
+            tierra = " No es posible.";
+        }
         datos = datos + ("//------------------------------------------") + "\n";
         datos = datos + (" Nombre del Destino turístico : " + d.getNombre()) + "\n";
         datos = datos + (" A una distancia de: " + d.getDistancia() + " km de Medellin.") + "\n";
-        datos = datos + (" Pide visa para viajer@s:" + pasaporte) + "\n";
+        datos = datos + (" Pide visa para viajer@s: " + pasaporte) + "\n";
+        datos = datos + (" Acceso por mar : " + mar) + "\n";
+        datos = datos + (" Acceso por tierra : " + tierra) + "\n";
         datos = datos + (" Cuenta con " + d.getHoteles().size() + " hoteles.") + "\n";
         datos = datos + (" ") + "\n";
         return datos;

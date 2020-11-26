@@ -47,34 +47,15 @@ public class MenuApp {
 
     public MenuApp() {
         
+        inicializarDatos();
         //Inicializador de receptores de Eventos.
         botonHandler = new Presion();
         cursorHandler = new Cursor();
 
-        
         //IMAGEN LATERAL
         Image im = new Image("BaseDatos/m.jpg");
         ImageView lateral = new ImageView(im);
         lateral.setFitWidth(400);
-
-        marco = new BorderPane();
-        barraMenu = new BarraMenu().getMenu();
-
-        //Desde aquí va a depender del argumento de entrada de MenuApp
-        opciones = new GridPane();
-        opciones.setAlignment(Pos.TOP_CENTER);
-        String s1 = "Viajeros:"+"\n"+"\n"+" - Formulario de Inscripcion"+"\n"+" - Funcionalidades de Viajeros";
-        String s2 = "Destino:"+"\n"+"\n"+" - Crear Destino"+"\n"+" - Funcionalidades de Destino";
-        String s3 = "Ventas:"+"\n"+"\n"+" - Venta Tiquetes"+"\n"+" - Cotizacion de Planes.";
-        b1 = new Button(s1);
-        b2 = new Button(s2);
-        b3 = new Button(s3);
-        b1.setMinSize(200, 190);
-        b2.setMinSize(200, 200);
-        b3.setMinSize(200, 200);
-        b1.setOnAction(botonHandler);
-        b2.setOnAction(botonHandler);
-        b3.setOnAction(botonHandler);
 
         opciones.add(b1, 0, 0);
         opciones.add(b2, 0, 1);
@@ -89,6 +70,45 @@ public class MenuApp {
 
     public Scene getEscena() {
         return scena;
+    }
+
+    public void inicializarDatos() {
+        marco = new BorderPane();
+        barraMenu = new BarraMenu().getMenu();
+
+        //Desde aquí va a depender del argumento de entrada de MenuApp
+        opciones = new GridPane();
+        opciones.setAlignment(Pos.TOP_CENTER);
+        String s1 = "Viajeros:" + "\n" + "\n" + " - Formulario de Inscripcion" + "\n" + " - Funcionalidades de Viajeros";
+        String s2 = "Destino:" + "\n" + "\n" + " - Crear Destino" + "\n" + " - Funcionalidades de Destino";
+        String s3 = "Ventas:" + "\n" + "\n" + " - Venta Tiquetes" + "\n" + " - Cotizacion de Planes.";
+        b1 = new Button(s1);
+        b2 = new Button(s2);
+        b3 = new Button(s3);
+        b1.setMinSize(200, 190);
+        b2.setMinSize(200, 200);
+        b3.setMinSize(200, 200);
+        b1.setOnAction(botonHandler);
+
+        b2.setOnAction(botonHandler);
+        b3.setOnAction(botonHandler);
+
+        b1.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+                Main.window.setScene(new MenuViajero().getEscena());
+            }
+        });
+
+        b2.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+                Main.window.setScene(new MenuDestino().getEscena());
+            }
+        });
+
     }
 
 }

@@ -74,12 +74,6 @@ public class Presion implements EventHandler<ActionEvent> {
                 Main.window.setScene(scena);
                 Main.window.show();
                 
-            }else if(b.equals(MenuApp.b1)){
-                Main.window.setScene(new MenuViajero().getEscena());            
-            }else if(b.equals(MenuApp.b2)){
-                
-            }else if(b.equals(MenuApp.b3)){
-                
             }
         }
 

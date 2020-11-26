@@ -4,6 +4,7 @@ import gestorAplicacion.utils.Destino;
 import gestorAplicacion.persons.Viajero;
 import gestorAplicacion.persons.Viajero;
 import java.util.*;
+import uiMain.Main;
 
 public class Hotel {
 
@@ -48,14 +49,19 @@ public class Hotel {
     Si no pudiera pagar ni lo más barato, entonces no podría reservar hotel con SAM-TRAVEL, aunque solo
     compraría tiquete de transporte.
      */
-    public static Boolean minimoDeEstadia(Viajero v,Destino d) {
+    public static Boolean minimoDeEstadia(Viajero v, Destino d) {
         boolean puedePagarNoche = false;
-        for(Hotel h : d.getHoteles()){
-            if(v.getPresupuesto() >= h.getCosto()){
+        for (Hotel h : d.getHoteles()) {
+            if (v.getPresupuesto() >= h.getCosto()) {
                 puedePagarNoche = true;
             }
         }
         return puedePagarNoche;
+    }
+
+    public String imprimirDatos() {
+        String txt = Main.t.imprimirHotel(this);
+        return txt;
     }
 
     //GETTERS AND SETTERS

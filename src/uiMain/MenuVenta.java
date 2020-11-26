@@ -50,7 +50,7 @@ public class MenuVenta {
     Image im;
     ImageView marcoIM;
     Viajero v;
-    String[] n;
+    public static String[] n;
 
     String[] tituloCriterios;
     String[] tipoCriterios;
@@ -70,20 +70,22 @@ public class MenuVenta {
         marco = new BorderPane();
         tituloCriterios = new String[]{"Destino ", " Transporte ", " Hotel ", " Estadia"};
         tipoCriterios = new String[]{"choice", "choice", "choice", "text"};
+        n = new String[100];
         formulario = new FieldPane(v, tituloCriterios, tipoCriterios);
-        Image im = new Image("BaseDatos/venta.jpg");
-        ImageView marcoIM = new ImageView();
+        im = new Image("BaseDatos/venta.jpg");
+        marcoIM = new ImageView();
+        
     }
 
     public Scene getScena() {
         return scena;
     }
 
-    public String[] ofertaDestinos(Viajero v) {
-        n = new String[10000];
+    public static String[] ofertaDestinos(Viajero v) {
+        n = new String[1000];
         Map<Destino, int[]> opcionesTransporte = Destino.esPosibleViajar(v);
         opcionesTransporte.forEach((key, value) -> {
-            if ((value[0] != -1) && (value[1] != -1) && (value[1] != -1)) {
+            if((value[0] != -1) && (value[1] != -1) && (value[2] != -1)) {
                 n[n.length] = key.getNombre();
             }
         });

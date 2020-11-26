@@ -66,7 +66,7 @@ public class MenuViajero {
     static Label l1;
     static String top;
 
-   static HBox botones1;
+    static HBox botones1;
     static HBox botones2;
     static ImageView marcoIM;
 
@@ -87,7 +87,6 @@ public class MenuViajero {
         marco.setCenter(formulario.getGrilla());
         marco.setBottom(botones);
         scena = new Scene(marco, 600, 600);
-        imp2 = "a";
     }
 
     public MenuViajero(Viajero v) {
@@ -105,7 +104,7 @@ public class MenuViajero {
         l1 = new Label(top + v.imprimirDatos());
 
         info.getChildren().addAll(l1, botones1, botones2, bInicio);
-        formulario = new FieldPane(tituloCriterios,tipoCriterios);
+        formulario = new FieldPane(tituloCriterios, tipoCriterios);
         marco = new BorderPane();
         marco.setPadding(new Insets(0, 0, 10, 0));
         marco.setTop(barraMenu);
@@ -166,7 +165,7 @@ public class MenuViajero {
         botones2.setAlignment(Pos.CENTER);
 
         bSolicitar.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent t) {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
@@ -231,12 +230,12 @@ public class MenuViajero {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle(" SAM-TRAVEL");
                 dialog.setHeaderText(" Retiro de Usuario ");
-                String retiro = "Sentimos mucho que se retire" +"\n"+
-                        "Hasta luego " + v.getNombre() + ", vuelve pronto.";
+                String retiro = "Sentimos mucho que se retire" + "\n"
+                        + "Hasta luego " + v.getNombre() + ", vuelve pronto.";
                 TextArea t1 = new TextArea(retiro);
                 dialog.getDialogPane().setContent(t1);
                 dialog.showAndWait();
-                
+
                 //Recargar de la página para mostrar la versión de MenuViajero
                 //Que no tiene asociado un Viajero.
                 MenuViajero mv = new MenuViajero();

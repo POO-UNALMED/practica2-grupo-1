@@ -132,17 +132,7 @@ public class Viajero extends Persona implements Consumidor {
         return resp;
     }
     
-    public String[] ofertaDestinos(Viajero v ){
-        String[] n = new String[]();
-        int contador = 0;
-        Map<Destino, int[]> opcionesTransporte = Destino.esPosibleViajar(v);
-        opcionesTransporte.forEach((key, value) -> {
-            if((value[0]!=-1)&&(value[1]!=-1)&&(value[1]!=-1)){
-                n[n.length] = key.getNombre();
-        }
-        });
-    }
-    
+
     //Verifica si el viajero puede o no permitirse pagar un hotel.
     public boolean puedePagarHotel(Destino d) {
         ArrayList<Hotel> hoteles = d.getHoteles();

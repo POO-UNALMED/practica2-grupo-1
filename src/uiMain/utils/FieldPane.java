@@ -1,5 +1,6 @@
 package uiMain.utils;
 
+import uiMain.MenuViajero;
 import uiMain.Main.*;
 import gestorAplicacion.persons.Viajero;
 import javafx.event.ActionEvent;
@@ -11,6 +12,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -67,13 +70,41 @@ public class FieldPane extends Pane {
         grid.add(bBuscar, 1, contador2 + 1);
 
     }
-    
-    public FieldPane(Viajero v){
-        
-    }
 
-    FieldPane() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public FieldPane(Viajero v, String[] campos, String[] tipos) {
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setVgap(10);
+        int contador = 0;
+        int contador2;
+        l1 = new Label("     SELECCIONE SU VIAJE ");
+        grid.add(l1, 0, 0);
+        for (String s : campos) {
+            Label l = new Label(s);
+            grid.add(l, 0, contador + 1);
+            if (tipos[contador] == "text") {
+                TextField t = new TextField();
+                grid.add(t, 1, contador + 1);
+
+            } else if (tipos[contador] == "choice") {
+                ChoiceBox des = new ChoiceBox();
+                ChoiceBox trans = new ChoiceBox();
+                ChoiceBox  = new ChoiceBox();
+                ChoiceBox trans = new ChoiceBox();
+                if(s.equals("Destino ")){
+                    des.add(v.)
+                }
+                c.getItems().add("Si");//Con destinos a los que puede viajar.
+                c.getItems().add("No");//El tipo de transporte.
+                grid.add(c, 1, contador + 1);
+            }
+            contador++;
+        }
+        
+        contador2 = contador + 3;
+        //grid.add(l2, 0, contador2);
+        //grid.add(, contador2 + 1);
+        //grid.add(bBuscar, 1, contador2 + 1);
     }
 
     public void acciones() {
@@ -140,5 +171,5 @@ public class FieldPane extends Pane {
     public GridPane getGrilla() {
         return grid;
     }
-    
+
 }

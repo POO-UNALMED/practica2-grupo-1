@@ -4,6 +4,7 @@ import gestorAplicacion.persons.Viajero;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.control.Alert;
 import uiMain.Main;
 import uiMain.Texto;
 
@@ -46,9 +47,9 @@ public class Destino {
         }
         return destino;
     }
-    
+
     //Imprimir Destinos
-    public String imprimirDatos(){
+    public String imprimirDatos() {
         String txt = Main.t.imprimirDestino(this);
         return txt;
     }
@@ -63,11 +64,14 @@ public class Destino {
 
     /*
     Metodo que determina si el presupuesto del viajero es el suficiente para las diferentes ofertas de transporte del programa.
+    Es muy importante entender este algoritmo a continuación, lo que hago es recorrer
+    los destinos en búsqueda de cuales puede costear el cliente.
+    son los posibles 
      */
-
     public static Map<Destino, int[]> esPosibleViajar(Viajero v) {
         Transporte t = new Transporte();
         int[] cotizacion = new int[3];
+        Boolean puedeViajar = false;
         Map<Destino, int[]> cotizacionPorDestino = new HashMap<Destino, int[]>();
         for (Destino d : listaDestinos) {
             cotizacion = t.cotizacionTransporte(d);
@@ -78,10 +82,17 @@ public class Destino {
             }
             if ((cotizacion[0] == -1) && (cotizacion[1] == -1) && (cotizacion[2] == -1)) {
                 Texto.alertaNoSePuedePagarViaje(d);
-
             } else {
                 cotizacionPorDestino.put(d, cotizacion);
+                puedeViajar = true;
             }
+        }
+        if (puedeViajar == false) {
+            Alert dialog = new Alert(Alert.AlertType.ERROR);
+            dialog.setTitle(" SAM-TRAVEl");
+            dialog.setHeaderText(" LO SENTIMOS");
+            dialog.setContentText(" El viajero no tiene oferta de viajes disponible.");
+            dialog.showAndWait();
         }
         return cotizacionPorDestino;
 

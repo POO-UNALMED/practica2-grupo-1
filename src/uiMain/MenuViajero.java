@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uiMain.utils;
+package uiMain;
 
 import uiMain.utils.BarraMenu;
 import gestorAplicacion.persons.Viajero;
@@ -39,34 +39,36 @@ import javafx.scene.layout.HBox;
 import uiMain.Main;
 import uiMain.MenuApp;
 import uiMain.Start;
+import uiMain.utils.BarraMenu;
+import uiMain.utils.FieldPane;
 import uiMain.utils.FieldPane;
 
 public class MenuViajero {
 
-    public static Scene scena;
-    public static Stage window;
-    public static BorderPane marco;
-    public static MenuBar barraMenu;
-    public static FieldPane formulario;
+    static Scene scena;
+    static Stage window;
+    static BorderPane marco;
+    static MenuBar barraMenu;
+    static FieldPane formulario;
     Viajero v;
 
-    public static HBox botones;
-    public static Button bInicio;
-    public static Button bLimpiar;
+    static HBox botones;
+    static Button bInicio;
+    static Button bLimpiar;
 
-    public static Button bRedimir;
-    public static Button bSolicitar;
-    public static Button bRetirar;
-    public static Button bCotizar;
-    public static Button bComprar;
-    public static Button bConsignar;
-    public static TextField pozo;
-    Label l1;
-    String top;
+    static Button bRedimir;
+    static Button bSolicitar;
+    static Button bRetirar;
+    static Button bCotizar;
+    static Button bComprar;
+    static Button bConsignar;
+    static TextField pozo;
+    static Label l1;
+    static String top;
 
-    public static HBox botones1;
-    public static HBox botones2;
-    public static ImageView marcoIM;
+   static HBox botones1;
+    static HBox botones2;
+    static ImageView marcoIM;
 
     public static Presion botonHandler;
     String[] tituloCriterios;
@@ -76,8 +78,6 @@ public class MenuViajero {
     public MenuViajero() {
 
         inicializarDatos();
-        tituloCriterios = new String[]{"Cedula", "Nombre", "¿Tiene visado?  "};
-        tipoCriterios = new String[]{"text", "text", "choice"};
         formulario = new FieldPane(tituloCriterios, tipoCriterios);
         barraMenu = new BarraMenu().getMenu();
 
@@ -91,7 +91,7 @@ public class MenuViajero {
     }
 
     public MenuViajero(Viajero v) {
-
+        Main.window.setTitle(" Usuario:  " + v.getNombre());
         inicializarDatos();
         actualizar(v);
         imp2 = "a";
@@ -105,7 +105,7 @@ public class MenuViajero {
         l1 = new Label(top + v.imprimirDatos());
 
         info.getChildren().addAll(l1, botones1, botones2, bInicio);
-        formulario = new FieldPane(v);
+        formulario = new FieldPane(tituloCriterios,tipoCriterios);
         marco = new BorderPane();
         marco.setPadding(new Insets(0, 0, 10, 0));
         marco.setTop(barraMenu);
@@ -219,10 +219,8 @@ public class MenuViajero {
         bComprar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-                dialog.setTitle(" SAM-TRAVEL");
-                dialog.setHeaderText(" Comprar un Tiquete");
-                dialog.showAndWait();
+                MenuVenta mv = new MenuVenta(v);
+                Main.window.setScene(mv.getScena());
             }
         });
 

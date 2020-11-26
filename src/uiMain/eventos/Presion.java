@@ -25,7 +25,7 @@ import uiMain.Start.*;
 import static uiMain.Start.*;
 import static uiMain.Main.*;
 import uiMain.utils.BarraMenu;
-import uiMain.utils.MenuViajero;
+import uiMain.MenuViajero;
 
 public class Presion implements EventHandler<ActionEvent> {
 
@@ -33,8 +33,6 @@ public class Presion implements EventHandler<ActionEvent> {
     public void handle(ActionEvent e) {
         
         Object comando = e.getSource();
-        Object comando2 = e.getSource().getClass();
-        System.out.println(comando2);
         
         if (comando instanceof MenuItem) {
             MenuItem item = (MenuItem) comando;

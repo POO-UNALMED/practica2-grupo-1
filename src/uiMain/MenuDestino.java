@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -51,10 +52,16 @@ public class MenuDestino {
     static Button bCrear;
     static Button bInicio;
     static Button bClear;
+    static Button bCrearHotel;
+
+    Label nom;
+    Label star;
+    Label costo;
 
     VBox caja;
     Label titulo;
     Label datosDestino;
+    GridPane gridCreacion;
 
     Viajero v;
     static Destino d;
@@ -72,7 +79,6 @@ public class MenuDestino {
     }
 
     public MenuDestino(Destino d) {
-        inicializarDatos();
         actualizar(d);
         marco.setTop(barraMenu.getMenu());
         marco.setCenter(caja);
@@ -92,13 +98,72 @@ public class MenuDestino {
     }
 
     public void actualizar(Destino d) {
+        inicializarDatos();
+        acciones();
         this.d = d;
-        caja = new VBox(10);
+        caja = new VBox(20);
         caja.setAlignment(Pos.CENTER);
         titulo = new Label(" DATOS DEL DESTINO TURÍSTICO");
         datosDestino = new Label(d.imprimirDatos());
-        bHoteles = new Button(" Ver listado de Hoteles ");
 
+        Label l2 = new Label(" - CREACION DE HOTEL PARA DESTINO - ");
+        HBox b1 = new HBox(30);
+
+        b1.getChildren().addAll(datosDestino, bHoteles);
+        b1.setAlignment(Pos.CENTER);
+
+        gridCreacion = new GridPane();
+        gridCreacion.setAlignment(Pos.CENTER);
+        gridCreacion.setVgap(20);
+        nom = new Label(" Nombre: ");
+        star = new Label(" Estrellas: ");
+        costo = new Label(" Costo/Noche: ");
+        TextField nomR = new TextField();
+        ChoiceBox starR = new ChoiceBox();
+        TextField costoR = new TextField();
+        for (int i = 1; i <= 5; i++) {
+            starR.getItems().add(i);
+        }
+        acciones();
+        gridCreacion.add(nom, 0, 0);
+        gridCreacion.add(nomR, 1, 0);
+        gridCreacion.add(star, 0, 1);
+        gridCreacion.add(starR, 1, 1);
+        gridCreacion.add(costo, 0, 2);
+        gridCreacion.add(costoR, 1, 2);
+
+        caja.getChildren().add(titulo);
+        caja.getChildren().add(b1);
+        caja.getChildren().add(l2);
+        caja.getChildren().add(gridCreacion);
+        caja.getChildren().add(bCrearHotel);
+        caja.getChildren().add(bInicio);
+
+    }
+
+    public void acciones() {
+        bCrearHotel = new Button(" Construir Hotel ");
+        bCrearHotel.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+
+                String nombre = ((TextField) gridCreacion.getChildren().get(1)).getText();
+                int stars = (Integer) ((ChoiceBox) gridCreacion.getChildren().get(3)).getValue();
+                System.out.println(stars);
+                int costo = Integer.parseInt(((TextField) gridCreacion.getChildren().get(5)).getText());
+
+                Hotel h = new Hotel(nombre, costo, d, stars);
+                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+                dialog.setTitle(" SAM-TRAVEL");
+                dialog.setHeaderText(" HOTEL CREADO EXITOSAMENTE.");
+                dialog.setContentText(h.imprimirDatos());
+                dialog.showAndWait();
+            }
+
+        });
+
+        bHoteles = new Button(" Ver listado de Hoteles ");
         bHoteles.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -118,7 +183,7 @@ public class MenuDestino {
                     dialog.showAndWait();
                 } else {
                     TextArea txt1 = new TextArea(" No hay hoteles disponibles en el destino turístico.");
-                    dialog.setHeaderText(" PETICIÓN RECHAZADA ");    
+                    dialog.setHeaderText(" PETICIÓN RECHAZADA ");
                     dialog.getDialogPane().setContent(txt1);
                     dialog.showAndWait();
                 }
@@ -126,11 +191,16 @@ public class MenuDestino {
             }
 
         });
-        
 
-        caja.getChildren().add(titulo);
-        caja.getChildren().add(datosDestino);
-        caja.getChildren().add(bHoteles);
+        bInicio = new Button(" - Volver al Menu Principal - ");
+        bInicio.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                MenuApp s = new MenuApp();
+                Main.window.setScene(s.getEscena());
+            }
+
+        });
 
     }
 

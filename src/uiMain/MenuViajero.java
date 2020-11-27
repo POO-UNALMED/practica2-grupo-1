@@ -218,8 +218,16 @@ public class MenuViajero {
         bComprar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                MenuVenta mv = new MenuVenta(v);
-                Main.window.setScene(mv.getScena());
+                if (v.puedePagarViaje()) {
+                    MenuVenta mv = new MenuVenta(v);
+                    Main.window.setScene(mv.getEscena());
+                }else{
+                    Alert dialog = new Alert(Alert.AlertType.ERROR);
+                    dialog.setHeaderText(" LO SENTIMOS ");
+                    dialog.setContentText(" El viajero " + v.getNombre() + " No cuenta con presupuesto" + "\n"+ "Para realizar un viaje.");
+                    dialog.showAndWait();
+                }
+
             }
         });
 

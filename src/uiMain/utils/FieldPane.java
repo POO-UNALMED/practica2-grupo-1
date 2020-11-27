@@ -39,6 +39,7 @@ public class FieldPane extends Pane {
         grid = new GridPane();
         int contador = 0;
         int contador2;
+        boolean prestablecido;
         TextField t1 = new TextField();
         ChoiceBox c1 = new ChoiceBox();
         if (campos.length == 3) {
@@ -47,17 +48,16 @@ public class FieldPane extends Pane {
             l1 = new Label("     INSCRIPCION DE VIAJERO");
             l2 = new Label("     BUSQUEDA POR CEDULA");
             acciones1();
+            prestablecido = true;
 
         } else {
             bEnviar = new Button(" Crear Destino ");
             bBuscar = new Button(" Elegir ");
             l1 = new Label("     CREACION DE NUEVO DESTINO");
-            l2 = new Label("     BUSQUEDA POR NOMBRE");
+            l2 = new Label("SELECCIONAR DESTINO");       
             acciones2();
+            prestablecido = false;
         }
-
-        grid.setAlignment(Pos.CENTER);
-        grid.setVgap(10);
 
         for (String s : campos) {
             Label l = new Label(s);
@@ -77,52 +77,25 @@ public class FieldPane extends Pane {
             }
             contador++;
         }
-        grid.add(l1, 0, 0);
-        grid.add(bEnviar, 1, contador + 1);
 
-        contador2 = contador + 3;
-        grid.add(l2, 0, contador2);
-        grid.add(t1, 0, contador2 + 1);
-        grid.add(bBuscar, 1, contador2 + 1);
-
-    }
-
-    public FieldPane(Viajero v, String[] campos, String[] tipos) {
-        grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
-        int contador = 0;
-        int contador2;
-        l1 = new Label("     SELECCIONE SU VIAJE ");
         grid.add(l1, 0, 0);
-        for (String s : campos) {
-            Label l = new Label(s);
-            grid.add(l, 0, contador + 1);
-            if (tipos[contador] == "text") {
-                TextField t = new TextField();
-                grid.add(t, 1, contador + 1);
-
-            } else if (tipos[contador] == "choice") {
-                ChoiceBox des = new ChoiceBox();
-                ChoiceBox trans = new ChoiceBox();
-                if (s.equals("Destino ")) {
-                    String[] destinos = MenuVenta.ofertaDestinos(v);
-                    for (String r : destinos) {
-                        des.getItems().add(r);
-                    }
-
-                }
-                //c.getItems().add("Si");//Con destinos a los que puede viajar.
-                //c.getItems().add("No");//El tipo de transporte.
-                grid.add(des, 1, contador + 1);
-            }
-            contador++;
-        }
-
+        grid.add(bEnviar, 1, contador + 1);
+        
         contador2 = contador + 3;
-        //grid.add(l2, 0, contador2);
-        //grid.add(, contador2 + 1);
-        //grid.add(bBuscar, 1, contador2 + 1);
+        grid.add(l2, 0, contador2);
+        
+        if (prestablecido) {
+            grid.add(t1, 0, contador2 + 1);
+        } else {
+            for (Destino d : Destino.getListaDestinos()){
+                c1.getItems().add(d.getNombre());
+            }
+            grid.add(c1, 0, contador2 + 1);
+        }
+        grid.add(bBuscar, 1, contador2 + 1);
+
     }
 
     public void acciones1() {
@@ -187,12 +160,16 @@ public class FieldPane extends Pane {
     }
 
     public void acciones2() {
+        
+        
         bEnviar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle(" SAM-TRAVEL");
+                
                 try {
+                    
                     String nombre = (String) ((TextField) grid.getChildren().get(1)).getText();
                     int distancia = Integer.parseInt(((TextField) grid.getChildren().get(3)).getText());
                     String choice = (String) ((ChoiceBox) grid.getChildren().get(5)).getValue();
@@ -204,7 +181,7 @@ public class FieldPane extends Pane {
                     } else {
                         visa = false;
                     }
-                    Destino d = new Destino(nombre, distancia, visa, accesoMar, accesoTierra);
+                    Destino d = new Destino(nombre, distancia, visa, accesoMar, accesoTierra);                   
                     MenuDestino.cambiarScena(d);
                     TextArea txt1 = new TextArea(d.imprimirDatos());
                     dialog.setHeaderText("CREACION DE NUEVO DESTINO EXITOSA");
@@ -227,23 +204,21 @@ public class FieldPane extends Pane {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle(" SAM-TRAVEL");
                 try {
-                    int ced = Integer.parseInt(((TextField) grid.getChildren().get(9)).getText());
-                    if (Viajero.verificarCedula(ced)) {
-                        Viajero v = Viajero.devolverPorCedula(ced);
-                        MenuViajero.cambiarScena(v);
-                        TextArea txt1 = new TextArea(v.imprimirDatos());
-                        dialog.setHeaderText("VIAJERO ENCONTRADO");
-                        dialog.getDialogPane().setContent(txt1);
-                        dialog.showAndWait();
-                    } else {
-                        throw new Exception("No se encontró cédula.");
-                    }
+                    String choice = (String) ((ChoiceBox) grid.getChildren().get(13)).getValue();
+                    Destino d = Destino.devolverDestino(choice);
+                    MenuDestino.cambiarScena(d);
+                    TextArea txt1 = new TextArea(d.imprimirDatos());
+                    dialog.setHeaderText(" DESTINO ENCONTRADO");
+                    dialog.getDialogPane().setContent(txt1);
+                    dialog.showAndWait();
+
                 } catch (Exception e) {
                     TextArea txt1 = new TextArea("ERROR AL INTRODUCIR LOS DATOS" + "\n" + "POR FAVOR INTENTELO DE NUEVO.");
                     dialog.setHeaderText("¡Ups!");
                     dialog.getDialogPane().setContent(txt1);
                     dialog.showAndWait();
                 }
+
             }
         });
     }

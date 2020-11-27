@@ -40,13 +40,13 @@ public class MenuApp {
 
     public static Button b1;
     public static Button b2;
-    public static Button b3;
+    public static Button bInicio;
 
     public static Presion botonHandler;
     public static Cursor cursorHandler;
 
     public MenuApp() {
-        
+
         inicializarDatos();
         //Inicializador de receptores de Eventos.
         botonHandler = new Presion();
@@ -59,7 +59,7 @@ public class MenuApp {
 
         opciones.add(b1, 0, 0);
         opciones.add(b2, 0, 1);
-        opciones.add(b3, 0, 2);
+        opciones.add(bInicio, 0, 2);
 
         marco.setPadding(new Insets(0, 0, 10, 0));
         marco.setTop(barraMenu);
@@ -79,19 +79,14 @@ public class MenuApp {
         //Desde aquí va a depender del argumento de entrada de MenuApp
         opciones = new GridPane();
         opciones.setAlignment(Pos.TOP_CENTER);
-        String s1 = "Viajeros:" + "\n" + "\n" + " - Formulario de Inscripcion" + "\n" + " - Funcionalidades de Viajeros";
-        String s2 = "Destino:" + "\n" + "\n" + " - Crear Destino" + "\n" + " - Funcionalidades de Destino";
-        String s3 = "Ventas:" + "\n" + "\n" + " - Venta Tiquetes" + "\n" + " - Cotizacion de Planes.";
+        String s1 = "Viajeros:" + "\n" + "\n" + " - Formulario de Inscripcion." + "\n" + " - Encontrar Viajero existente."+ "\n" + " - Funciones de Viajero."+ "\n" + " - Venta de Tiquetes.";
+        String s2 = "Destino:" + "\n" + "\n" + " - Crear Destino" + "\n" + " - Encontrar Destino existente."+ "\n" + " - Consulta de Hoteles por Destino"+ "\n" + " - Creacion de Hoteles";
         b1 = new Button(s1);
         b2 = new Button(s2);
-        b3 = new Button(s3);
+        bInicio = new Button(" - Volver al Inicio - ");
         b1.setMinSize(200, 190);
         b2.setMinSize(200, 200);
-        b3.setMinSize(200, 200);
-        b1.setOnAction(botonHandler);
-
-        b2.setOnAction(botonHandler);
-        b3.setOnAction(botonHandler);
+        bInicio.setMinSize(200, 200);
 
         b1.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -106,6 +101,14 @@ public class MenuApp {
             @Override
             public void handle(ActionEvent t) {
                 Main.window.setScene(new MenuDestino().getEscena());
+            }
+        });
+
+        bInicio.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+                Main.window.setScene(new Start().getEscena());
             }
         });
 

@@ -111,40 +111,40 @@ public class Texto {
         System.out.println(" ");
     }
 
-    public void imprimirTiquete(Tiquete t) {
+    public String imprimirTiquete(Tiquete t) {
+        String datos = "";
         if (t.getDiasEstadia() != 0) {
-            System.out.println(" ");
-            System.out.println("//-----------------------------------------------------------//");
-            System.out.println("//--------COMPROBANTE DE TIQUETE DE VIAJE SAM-TRAVEL---------//");
-            System.out.println("//                                                           //");
-            System.out.println("// Documento: " + t.getViajero().getCedula());
-            System.out.println("// A nombre de: " + t.getViajero().getNombre());
-            System.out.println("// Con destino a : " + t.getDestino().getNombre());
-            System.out.println("// Estadia: " + t.getDiasEstadia() + " dia(s)");
-            System.out.println("// Transporte de tipo: " + t.getTransporte().getTipo());
-            System.out.println("// Tiempo de Viaje: " + t.getTiempoViaje() + " horas");
-            System.out.println("// Hotel: " + t.getHotel().getNombre() + " de categoría: " + t.getHotel().getEstrellas() + " Estrellas.");
-            System.out.println("// Agente encargado: ID " + t.getAgente().getCedula() + " Nombre: " + t.getAgente().getNombre());
-            System.out.println(" ");
-            System.out.println("// PRECIO TOTAL: " + t.getPrecio() + " pesos.");
-            System.out.println("//-----------------------------------------------------------//");
-            System.out.println("//-----------------------------------------------------------//");
+            datos = datos + (" ") + "\n";
+            datos = datos + ("//---COMPROBANTE DE TIQUETE DE VIAJE SAM-TRAVEL---//") + "\n";
+            datos = datos + (" ") + "\n";
+            datos = datos + ("// Documento: " + t.getViajero().getCedula()) + "\n";
+            datos = datos + ("// A nombre de: " + t.getViajero().getNombre()) + "\n";
+            datos = datos + ("// Con destino a : " + t.getDestino().getNombre()) + "\n";
+            datos = datos + ("// Estadia: " + t.getDiasEstadia() + " dia(s)") + "\n";
+            datos = datos + ("// Transporte de tipo: " + t.getTransporte().getTipo()) + "\n";
+            datos = datos + ("// Tiempo de Viaje: " + t.getTiempoViaje() + " horas") + "\n";
+            datos = datos + ("// Hotel: " + t.getHotel().getNombre() + " de categoría: " + t.getHotel().getEstrellas() + " Estrellas.") + "\n";
+            datos = datos + ("// Agente encargado: ID " + t.getAgente().getCedula() + " Nombre: " + t.getAgente().getNombre()) + "\n";
+            datos = datos + (" ") + "\n";
+            datos = datos + ("// PRECIO TOTAL: " + t.getPrecio() + " pesos.") + "\n";
+            datos = datos + ("//--------------------------------------//") + "\n";
+            datos = datos + (" ") + "\n";
         } else {
-            System.out.println(" ");
-            System.out.println("//-----------------------------------------------------------//");
-            System.out.println("//--------COMPROBANTE DE TIQUETE DE VIAJE SAM-TRAVEL---------//");
-            System.out.println("//                                                           //");
-            System.out.println("// Documento: " + t.getViajero().getCedula());
-            System.out.println("// A nombre de: " + t.getViajero().getNombre());
-            System.out.println("// Con destino a : " + t.getDestino().getNombre());
-            System.out.println("// Transporte de tipo: " + t.getTransporte().getTipo());
-            System.out.println("// Tiempo de Viaje: " + t.getTiempoViaje() + " horas");
-            System.out.println("// Agente encargado: ID " + t.getAgente().getCedula() + " Nombre: " + t.getAgente().getNombre());
-            System.out.println(" ");
-            System.out.println("// PRECIO TOTAL: " + t.getPrecio() + " pesos.");
-            System.out.println("//-----------------------------------------------------------//");
-            System.out.println("//-----------------------------------------------------------//");
+            datos = datos + (" ") + "\n";
+            datos = datos + ("//---COMPROBANTE DE TIQUETE DE VIAJE SAM-TRAVEL---//") + "\n";
+            datos = datos + (" ") + "\n";
+            datos = datos + ("// Documento: " + t.getViajero().getCedula()) + "\n";
+            datos = datos + ("// A nombre de: " + t.getViajero().getNombre()) + "\n";
+            datos = datos + ("// Con destino a : " + t.getDestino().getNombre()) + "\n";
+            datos = datos + ("// Transporte de tipo: " + t.getTransporte().getTipo()) + "\n";
+            datos = datos + ("// Tiempo de Viaje: " + t.getTiempoViaje() + " horas") + "\n";
+            datos = datos + ("// Agente encargado: ID " + t.getAgente().getCedula() + " Nombre: " + t.getAgente().getNombre()) + "\n";
+            datos = datos + (" ") + "\n";
+            datos = datos + ("// PRECIO TOTAL: " + t.getPrecio() + " pesos.") + "\n";
+            datos = datos + ("//--------------------------------------//") + "\n";
+            datos = datos + (" ") + "\n";
         }
+        return datos;
 
     }
 

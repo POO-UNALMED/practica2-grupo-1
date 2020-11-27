@@ -68,6 +68,7 @@ public class MenuDestino {
 
     String[] tituloCriterios;
     String[] tipoCriterios;
+    ImageView marcoIM;
 
     public MenuDestino() {
         inicializarDatos();
@@ -80,9 +81,11 @@ public class MenuDestino {
 
     public MenuDestino(Destino d) {
         actualizar(d);
+        
         marco.setTop(barraMenu.getMenu());
         marco.setCenter(caja);
-        marco.setPadding(new Insets(0, 0, 10, 0));
+        marco.setBottom(marcoIM);
+        marco.setPadding(new Insets(0, 0, 0, 0));
         scena = new Scene(marco, 600, 600);
     }
 
@@ -95,6 +98,7 @@ public class MenuDestino {
         tituloCriterios = new String[]{"Nombre ", " Distancia ", " ¿Requiere visa? ", " Accesible por mar ", " Accesible por tierra "};
         tipoCriterios = new String[]{"text", "text", "choice", "check", "check"};
         formulario = new FieldPane(tituloCriterios, tipoCriterios);
+        
     }
 
     public void actualizar(Destino d) {
@@ -105,6 +109,10 @@ public class MenuDestino {
         caja.setAlignment(Pos.CENTER);
         titulo = new Label(" DATOS DEL DESTINO TURÍSTICO");
         datosDestino = new Label(d.imprimirDatos());
+        
+        marcoIM = new ImageView(new Image("BaseDatos/pat.jpg"));
+        marcoIM.setFitHeight(100);
+        marcoIM.setFitWidth(Main.ancho);
 
         Label l2 = new Label(" - CREACION DE HOTEL PARA DESTINO - ");
         HBox b1 = new HBox(30);

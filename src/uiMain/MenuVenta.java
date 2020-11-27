@@ -100,7 +100,14 @@ public class MenuVenta {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(20);
+        
+        VBox cabecera = new VBox(20);
+        cabecera.setAlignment(Pos.CENTER);
         Label titulo = new Label(" - PLATAFORMA PARA VENTA DE TIQUETES - ");
+        Label nombre = new Label(" Usuario : " + v.getNombre());
+        Label pres = new Label(" Presupuesto : " + v.getPresupuesto());
+        cabecera.getChildren().addAll(titulo,nombre,pres);
+        
         Label destino = new Label(" Destino:  ");
         Label trans = new Label(" Transporte:  ");
         Label hotel = new Label(" Hotel:  ");
@@ -134,7 +141,7 @@ public class MenuVenta {
         grid.add(cHotel, 1, 2);
         grid.add(estadia, 0, 3);
         grid.add(cEstadia, 1, 3);
-        screen.getChildren().add(titulo);
+        screen.getChildren().add(cabecera);
         screen.getChildren().add(grid);
         screen.getChildren().add(total);
 
@@ -183,7 +190,7 @@ public class MenuVenta {
                     presupuestoHotel = v.getPresupuesto() - costoTransporte;
                     if (!(d1.getHoteles().isEmpty())) {
                         for (Hotel h : d1.getHoteles()) {
-                            if (h.getCosto() <= presupuestoHotel) {
+                            if (h.getCosto() < presupuestoHotel) {
                                 cHotel.getItems().add(h.getNombre() + " - Costo " + h.getCosto());
                             }
                         }

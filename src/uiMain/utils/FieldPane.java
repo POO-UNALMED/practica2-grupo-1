@@ -1,5 +1,6 @@
 package uiMain.utils;
 
+import gestorAplicacion.persons.Persona;
 import uiMain.MenuViajero;
 import uiMain.Main.*;
 import gestorAplicacion.persons.Viajero;
@@ -54,7 +55,7 @@ public class FieldPane extends Pane {
             bEnviar = new Button(" Crear Destino ");
             bBuscar = new Button(" Elegir ");
             l1 = new Label("     CREACION DE NUEVO DESTINO");
-            l2 = new Label("SELECCIONAR DESTINO");       
+            l2 = new Label("SELECCIONAR DESTINO");
             acciones2();
             prestablecido = false;
         }
@@ -82,14 +83,14 @@ public class FieldPane extends Pane {
         grid.setVgap(10);
         grid.add(l1, 0, 0);
         grid.add(bEnviar, 1, contador + 1);
-        
+
         contador2 = contador + 3;
         grid.add(l2, 0, contador2);
-        
+
         if (prestablecido) {
             grid.add(t1, 0, contador2 + 1);
         } else {
-            for (Destino d : Destino.getListaDestinos()){
+            for (Destino d : Destino.getListaDestinos()) {
                 c1.getItems().add(d.getNombre());
             }
             grid.add(c1, 0, contador2 + 1);
@@ -115,12 +116,22 @@ public class FieldPane extends Pane {
                     } else {
                         visa = false;
                     }
-                    Viajero v = new Viajero(ced, nom, visa, 0);
-                    MenuViajero.cambiarScena(v);
-                    TextArea txt1 = new TextArea(v.imprimirDatos());
-                    dialog.setHeaderText("CREACION DE NUEVO USUARIO EXITOSA");
-                    dialog.getDialogPane().setContent(txt1);
-                    dialog.showAndWait();
+
+                    TextArea txt1;
+
+                    if (!(Persona.verificarCedula(ced))) {
+                        Viajero v = new Viajero(ced, nom, visa, 0);
+                        MenuViajero.cambiarScena(v);
+                        txt1 = new TextArea(v.imprimirDatos());
+                        dialog.setHeaderText("CREACION DE NUEVO USUARIO EXITOSA");
+                        dialog.getDialogPane().setContent(txt1);
+                        dialog.showAndWait();
+                    } else {
+                        txt1 = new TextArea("La cedula ingresada ya se encuentra registrada en nuestro sistema.");
+                        dialog.setHeaderText("ACCIÓN DENEGADA");
+                        dialog.getDialogPane().setContent(txt1);
+                        dialog.showAndWait();
+                    }
 
                 } catch (Exception e) {
                     TextArea txt1 = new TextArea("ERROR AL INTRODUCIR LOS DATOS" + "\n" + "POR FAVOR INTENTELO DE NUEVO.");
@@ -160,16 +171,15 @@ public class FieldPane extends Pane {
     }
 
     public void acciones2() {
-        
-        
+
         bEnviar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.setTitle(" SAM-TRAVEL");
-                
+
                 try {
-                    
+
                     String nombre = (String) ((TextField) grid.getChildren().get(1)).getText();
                     int distancia = Integer.parseInt(((TextField) grid.getChildren().get(3)).getText());
                     String choice = (String) ((ChoiceBox) grid.getChildren().get(5)).getValue();
@@ -181,7 +191,7 @@ public class FieldPane extends Pane {
                     } else {
                         visa = false;
                     }
-                    Destino d = new Destino(nombre, distancia, visa, accesoMar, accesoTierra);                   
+                    Destino d = new Destino(nombre, distancia, visa, accesoMar, accesoTierra);
                     MenuDestino.cambiarScena(d);
                     TextArea txt1 = new TextArea(d.imprimirDatos());
                     dialog.setHeaderText("CREACION DE NUEVO DESTINO EXITOSA");

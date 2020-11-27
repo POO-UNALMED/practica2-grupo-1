@@ -8,6 +8,7 @@ package uiMain;
 import uiMain.utils.BarraMenu;
 import gestorAplicacion.persons.Viajero;
 import gestorAplicacion.utils.Destino;
+import gestorAplicacion.utils.Tiquete;
 import java.util.Map;
 import uiMain.eventos.Presion;
 import javafx.application.Application;
@@ -69,6 +70,7 @@ public class MenuViajero {
     static HBox botones1;
     static HBox botones2;
     static ImageView marcoIM;
+    Button bViajes;
 
     public static Presion botonHandler;
     String[] tituloCriterios;
@@ -90,6 +92,7 @@ public class MenuViajero {
     }
 
     public MenuViajero(Viajero v) {
+        //this.v = v;
         Main.window.setTitle(" Usuario:  " + v.getNombre());
         inicializarDatos();
         actualizar(v);
@@ -98,12 +101,12 @@ public class MenuViajero {
         VBox info = new VBox(30);
         info.setAlignment(Pos.TOP_CENTER);
         info.setPadding(new Insets(50, 10, 10, 10));
-        top = ("//----------------------------------------//") + "\n"
-                + "             DATOS PERSONALES" + "\n";
 
-        l1 = new Label(top + v.imprimirDatos());
+        HBox datosPersonales = new HBox(20);
+        datosPersonales.setAlignment(Pos.CENTER);
+        datosPersonales.getChildren().addAll(l1, bViajes);
 
-        info.getChildren().addAll(l1, botones1, botones2, bInicio);
+        info.getChildren().addAll(datosPersonales, botones1, botones2, bInicio);
         formulario = new FieldPane(tituloCriterios, tipoCriterios);
         marco = new BorderPane();
         marco.setPadding(new Insets(0, 0, 10, 0));
@@ -130,6 +133,7 @@ public class MenuViajero {
                 Main.window.setScene(new MenuApp().getEscena());
             }
         });
+
         bLimpiar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -149,6 +153,11 @@ public class MenuViajero {
         marcoIM = new ImageView(new Image("BaseDatos/p1.jpg"));
         marcoIM.setFitHeight(150);
         marcoIM.setFitWidth(Main.ancho);
+
+        top = ("//----------------------------------------//") + "\n"
+                + "             DATOS PERSONALES" + "\n";
+        bViajes = new Button(" - Viajes realizados - ");
+        l1 = new Label(top + v.imprimirDatos());
 
         botones1 = new HBox(10);
         botones2 = new HBox(10);
@@ -221,10 +230,10 @@ public class MenuViajero {
                 if (v.puedePagarViaje()) {
                     MenuVenta mv = new MenuVenta(v);
                     Main.window.setScene(mv.getEscena());
-                }else{
+                } else {
                     Alert dialog = new Alert(Alert.AlertType.ERROR);
                     dialog.setHeaderText(" LO SENTIMOS ");
-                    dialog.setContentText(" El viajero " + v.getNombre() + " No cuenta con presupuesto" + "\n"+ "Para realizar un viaje.");
+                    dialog.setContentText(" El viajero " + v.getNombre() + " No cuenta con presupuesto" + "\n" + "Para realizar un viaje.");
                     dialog.showAndWait();
                 }
 
@@ -268,6 +277,21 @@ public class MenuViajero {
                     dialog.showAndWait();
                 }
 
+            }
+        });
+
+        bViajes.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                String imp = "";
+                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+                dialog.setHeaderText(" Viajes realizado por " + v.getNombre());
+                for (Tiquete tiquete : v.getViajesRealizados()) {
+                    imp = imp + tiquete.imprimirDatos();
+                }
+                TextArea ta = new TextArea(imp);
+                dialog.getDialogPane().setContent(ta);
+                dialog.showAndWait();
             }
         });
     }

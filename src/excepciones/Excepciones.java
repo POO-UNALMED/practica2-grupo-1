@@ -1,4 +1,4 @@
-package java.lang;
+package excepciones;
 
 public class Excepciones extends Throwable {
 

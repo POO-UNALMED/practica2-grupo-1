@@ -100,14 +100,14 @@ public class MenuVenta {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(20);
-        
+
         VBox cabecera = new VBox(20);
         cabecera.setAlignment(Pos.CENTER);
         Label titulo = new Label(" - PLATAFORMA PARA VENTA DE TIQUETES - ");
         Label nombre = new Label(" Usuario : " + v.getNombre());
         Label pres = new Label(" Presupuesto : " + v.getPresupuesto());
-        cabecera.getChildren().addAll(titulo,nombre,pres);
-        
+        cabecera.getChildren().addAll(titulo, nombre, pres);
+
         Label destino = new Label(" Destino:  ");
         Label trans = new Label(" Transporte:  ");
         Label hotel = new Label(" Hotel:  ");
@@ -184,18 +184,21 @@ public class MenuVenta {
                     costoTransporte = Integer.parseInt(imp.substring(imp.lastIndexOf(" ") + 1));
                     String[] cadena = imp.split(" ");
                     String tipoTransporte = cadena[0].toLowerCase();
-                    tr = new Transporte(tipoTransporte,d1);
+                    tr = new Transporte(tipoTransporte, d1);
                     subtotal = subtotal + costoTransporte;
                     txtPago.setText(Integer.toString(subtotal));
                     presupuestoHotel = v.getPresupuesto() - costoTransporte;
                     if (!(d1.getHoteles().isEmpty())) {
                         for (Hotel h : d1.getHoteles()) {
-                            if (h.getCosto() < presupuestoHotel) {
+                            if (h.getCosto() <= presupuestoHotel) {
                                 cHotel.getItems().add(h.getNombre() + " - Costo " + h.getCosto());
                             }
                         }
                     } else {
-                        System.out.println("llega aca12");
+                        cHotel.getItems().add("No disponible");
+                        cEstadia.getItems().add(0);
+                    }
+                    if (presupuestoHotel <= 0) {
                         cHotel.getItems().add("No disponible");
                         cEstadia.getItems().add(0);
                     }
@@ -239,11 +242,11 @@ public class MenuVenta {
             public void handle(ActionEvent t) {
                 Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
                 dialog.setHeaderText(" COMPROBANTE DE PAGO ");
-                if( (Integer)cEstadia.getValue() == 0){
-                    tiquete = new Tiquete(v,tr);
-                    System.out.println(tiquete.getViajero().getNombre()); 
-                }else{
-                    tiquete = new Tiquete(v,tr,h1,diasEstadia);
+                if ((Integer) cEstadia.getValue() == 0) {
+                    tiquete = new Tiquete(v, tr);
+                    System.out.println(tiquete.getViajero().getNombre());
+                } else {
+                    tiquete = new Tiquete(v, tr, h1, diasEstadia);
                     System.out.println(tiquete.getPrecio());
                 }
                 TextArea ta = new TextArea(tiquete.imprimirDatos());

@@ -83,8 +83,14 @@ public class Destino {
             if ((cotizacion[0] == -1) && (cotizacion[1] == -1) && (cotizacion[2] == -1)) {
                 Texto.alertaNoSePuedePagarViaje(d);
             } else {
-                cotizacionPorDestino.put(d, cotizacion);
-                puedeViajar = true;
+                if (v.isVisado()) {
+                    cotizacionPorDestino.put(d, cotizacion);
+                    puedeViajar = true;
+                } else if (!d.pideVisa) {
+                    cotizacionPorDestino.put(d, cotizacion);
+                    puedeViajar = true;
+                }
+
             }
         }
         if (puedeViajar == false) {

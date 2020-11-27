@@ -220,6 +220,7 @@ public class MenuViajero {
         bCotizar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+
                 cotizarViaje(v);
             }
         });
@@ -268,12 +269,18 @@ public class MenuViajero {
                 dialog.setTitle(" SAM-TRAVEL");
                 try {
                     int consignacion = Integer.parseInt(pozo.getText());
-                    v.consignarDinero(consignacion);
-                    l1.setText(top + v.imprimirDatos());
-                    dialog.setHeaderText(" Consignación Exitosa");
-                    dialog.showAndWait();
+                    if (consignacion > 0) {
+                        v.consignarDinero(consignacion);
+                        l1.setText(top + v.imprimirDatos());
+                        dialog.setHeaderText(" Consignación Exitosa");
+                        dialog.showAndWait();
+                    }
+                    else{
+                        throw new Exception("Valor de consignación negativo.");
+                    }
+
                 } catch (Exception e) {
-                    dialog.setHeaderText(" Error en Consignación");
+                    dialog.setHeaderText(" Error en Consignación, se ingreso un comando inválido.");
                     dialog.showAndWait();
                 }
 

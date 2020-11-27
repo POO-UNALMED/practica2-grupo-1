@@ -6,6 +6,7 @@ import gestorAplicacion.utils.Destino;
 import gestorAplicacion.utils.Hotel;
 import gestorAplicacion.utils.Tiquete;
 import gestorAplicacion.utils.Transporte;
+import java.util.Map;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -33,7 +34,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 
     public static Stage window;
-    public static Start inicho;
+    public static Start inicio;
     public static Texto t;
 
     //Constantes
@@ -47,15 +48,17 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         //Inicialización de GUI
-        Start Inicio = new Start();
+        inicio = new Start();
         window = new Stage();
         window.setTitle("SAM-TRAVEL v 1.0");
-        window.setScene(new Start().getEscena());
+        window.setScene(inicio.getEscena());
         window.show();
+
     }
 
     public static void main(String[] args) {
         cargarInstancias();
+        String imp = "";
         t = new Texto();
         launch(args);
     }

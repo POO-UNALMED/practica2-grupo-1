@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import static uiMain.Main.alto;
 import static uiMain.Main.altoGrid;
 import static uiMain.Main.ancho;
@@ -58,14 +59,10 @@ public class Start {
     public static Image imageP4;
 
     //Objetos P5
-    public static String cv1;
-    public static String cv2;
-    public static Button b2;
     public static VBox p5;
-    public static TextArea hoja1;
-    public static TextArea hoja2;
-    public static Image image1;
-    public static ImageView imageView1;
+    public static Label hdv1;
+    public static Label hdv2;
+    
 
     //OBJETOS P6
     public static GridPane p6;
@@ -73,10 +70,19 @@ public class Start {
     public static ImageView marco2;
     public static ImageView marco3;
     public static ImageView marco4;
+    public static ImageView marco5;
+    public static ImageView marco6;
+    public static ImageView marco7;
+    public static ImageView marco8;
     public static Image im1;
     public static Image im2;
     public static Image im3;
-    public static Image im4;
+    public static Image im4;    
+    public static Image im5;
+    public static Image im6;
+    public static Image im7;
+    public static Image im8;
+    
 
     public Start() {
 
@@ -105,7 +111,7 @@ public class Start {
 
         //Objetos P3
         saludo = Main.t.presentacion();
-        descripcion = "Descripcion";
+        descripcion = " SAM-TRAVEL Es un programa diseñado para administrar el manejo de una agencia de viajes, contando con el manejo de usuarios, destinos y hoteles. Asi como del registro de viajes y cotizaciones. Esperamos que disfrute su experiencia en la plataforma.";
         p3 = new VBox(20);
 
         txt1 = new TextArea(saludo);
@@ -131,18 +137,30 @@ public class Start {
         p4.getChildren().addAll(marcoP4, bInicio);
 
         //Objetos P5
-        cv1 = "Hoja de Vida1";
-        cv2 = "Hoja de Vida2";
-        b2 = new Button("Fotos");
-        p5 = new VBox(20);
-        hoja1 = new TextArea(cv1);
-        hoja1.setPrefSize(anchoGrid - 20, altoGrid - 20);
-        hoja1.setOnMouseClicked(cursorHandler);//Llama un evento cuando se toca el TextArea en p5.
-
-        hoja2 = new TextArea(cv2);
-        hoja2.setPrefSize(anchoGrid - 20, altoGrid - 20);
-        hoja2.setOnMouseClicked(cursorHandler);//Llama un evento cuando se toca el TextArea en p5.
-        p5.getChildren().addAll(hoja1);
+        p5 = new VBox();
+        p5.setPadding(new Insets(10,10,10,10));
+        hdv1 = new Label("Mauricio Builes " + "\n" + 
+                "\"Hola tengo 27 años soy estudiante de la Universidad Nacional de Colombia, En mi tiempo libre me gusta jugar ajedrez y baloncesto\"");
+        hdv1.setMaxWidth(200);
+        
+        //descripcion.setMaxHeight(200);
+        hdv1.setWrapText(true);
+        hdv1.setFont(new Font("Arial",20));
+        hdv1.setStyle("-fx-text-alignment: justify;");
+        hdv1.setStyle("-fx-padding: 0 0 10 0;");    
+               
+        p5.setPrefSize(anchoGrid, altoGrid-30);
+        p5.setStyle("-fx-border-color: black");
+        
+        String pres = "Mi nombre es Carlos Mario, tengo 26 años y estudio en la Universidad Nacional de Colombia, gasto mi tiempo entre mi familia, amigos cercanos y con actividades que considero aportantes.";
+        String cv = "Persona activa, en constante aprendizaje y con interés de laborar en proyectos de mi área académica. Conocimiento y uso de herramientas ofimáticas, lenguajes de programación y sistemas gestores de datos.";
+        hdv2 = new Label(pres + "\n" +" "+ "\n" + cv);
+        hdv2.setMaxWidth(250);
+        hdv2.setWrapText(true);
+        p5.setOnMouseClicked(cursorHandler);
+        p5.getChildren().addAll(hdv2);
+        
+        
 
         //Objetos P6
         p6 = new GridPane();
@@ -150,11 +168,19 @@ public class Start {
         im2 = new Image("BaseDatos/m2.jpg");
         im3 = new Image("BaseDatos/m3.jpg");
         im4 = new Image("BaseDatos/m4.jpg");
+        im5 = new Image("BaseDatos/r1.jpg");
+        im6 = new Image("BaseDatos/r2.jpg");
+        im7 = new Image("BaseDatos/r3.jpg");
+        im8 = new Image("BaseDatos/r4.jpg");
 
         marco1 = new ImageView(im1);
         marco2 = new ImageView(im2);
         marco3 = new ImageView(im3);
         marco4 = new ImageView(im4);
+        marco5 = new ImageView(im5);
+        marco6 = new ImageView(im6);
+        marco7 = new ImageView(im7);
+        marco8 = new ImageView(im8);
 
         marco1.setFitHeight(altoGrid / 2);
         marco1.setFitWidth(anchoGrid / 2);
@@ -164,6 +190,14 @@ public class Start {
         marco3.setFitWidth(anchoGrid / 3);
         marco4.setFitHeight(altoGrid / 3);
         marco4.setFitWidth(anchoGrid / 3);
+        marco5.setFitHeight(altoGrid / 2);
+        marco5.setFitWidth(anchoGrid / 2);
+        marco6.setFitHeight(altoGrid / 2);
+        marco6.setFitWidth(anchoGrid / 2);
+        marco7.setFitHeight(altoGrid / 2);
+        marco7.setFitWidth(anchoGrid / 2);
+        marco8.setFitHeight(altoGrid / 2);
+        marco8.setFitWidth(anchoGrid / 2);
 
         p6.setPrefSize(anchoGrid, altoGrid);
         p6.setAlignment(Pos.CENTER);
@@ -192,7 +226,7 @@ public class Start {
 
         //BoderPane
         BorderPane marco = new BorderPane();
-        marco.setPadding(new Insets(0, 10, 0, 10));
+        marco.setPadding(new Insets(0, 10, 10, 10));
         marco.setTop(menuBar);
         marco.setLeft(p1);
         marco.setRight(p2);

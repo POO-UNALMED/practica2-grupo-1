@@ -4,7 +4,6 @@ import gestorAplicacion.utils.Destino;
 import gestorAplicacion.utils.Hotel;
 import gestorAplicacion.utils.Tiquete;
 
-
 import java.util.*;
 import uiMain.Main;
 import uiMain.Texto;
@@ -43,13 +42,13 @@ public class Viajero extends Persona implements Consumidor {
             this.setVisado(false);
         }
     }
-    
+
     //Método que hace que el viajero se retire del sistema.
     @Override
     public void retirarse() {
         listaViajeros.remove(this);
     }
-    
+
     //Método que se implementa de la interfaz de consumidor.
     @Override
     public void pagar(int cobro) {
@@ -57,7 +56,7 @@ public class Viajero extends Persona implements Consumidor {
         setPresupuesto(actual - cobro);
 
     }
-    
+
     //METODO HEREDADO DE PERSONA
     //Busca si el viajero está dentro de la base de datos.
     //Lo buscará a partir de su número de cédula.
@@ -71,7 +70,7 @@ public class Viajero extends Persona implements Consumidor {
         }
         return existe;
     }
-    
+
     //MÉTODOS NORMALES
     //Busca si el viajero está dentro de la base de datos.
     //Lo buscará a partir de su número de cédula.
@@ -85,7 +84,7 @@ public class Viajero extends Persona implements Consumidor {
         }
         return viajeroActual;
     }
-    
+
     //Para aumentar el presupuesto de un viajero.
     public void consignarDinero(int consignacion) {
         int presupuesto = this.presupuesto;
@@ -104,22 +103,56 @@ public class Viajero extends Persona implements Consumidor {
                 if (this.getPresupuesto() >= costo) {
                     destinosPosibles.add(d);
                 }
-            } 
+            }
         }
         return destinosPosibles;
     }
-    
+
     //Imprimir Viajeros
-    public String imprimirDatos(){
+    public String imprimirDatos() {
         String txt = Main.t.imprimirViajero(this);
         return txt;
     }
-    
+
+    //Solicitar Visa
+    public Boolean solicitarVisa() {
+        Boolean resp;
+        if (!this.isVisado()) {
+            if ((this.getPresupuesto() > 2500) && (this.haViajado())) {
+                resp = true;
+            } else {
+                resp = false;
+            }
+        } else {
+            resp = true;
+        }
+        return resp;
+    }
+
+    //Verifca si es Viajero puede costear aunque sea el viaje más barato.
+    public boolean puedePagarViaje() {
+        boolean puedeViajar = false;
+        for (Destino d : Destino.getListaDestinos()) {
+            if (d.isAccesoTierra()) {
+                if (this.getPresupuesto() >= d.getDistancia()) {
+                    puedeViajar = true;
+                }
+            } else if (d.isAccesoMar()) {
+                if (this.getPresupuesto() >= d.getDistancia() * 2) {
+                    puedeViajar = true;
+                }
+            } else if (this.getPresupuesto() >= d.getDistancia() * 3) {
+                puedeViajar = true;
+            }
+        }
+        return puedeViajar;
+    }
+
+
     //Verifica si el viajero puede o no permitirse pagar un hotel.
     public boolean puedePagarHotel(Destino d) {
-        ArrayList<Hotel> hoteles = d.getHoteles();
         int contador = 0;
-        for (Hotel h : hoteles) {
+        for (Hotel h : d.getHoteles()) {
             if (this.getPresupuesto() > h.getCosto()) {
                 contador++;
             }
@@ -130,7 +163,7 @@ public class Viajero extends Persona implements Consumidor {
             return true;
         }
     }
-    
+
     //Se llama este método cuando se quiere saber si cumple el requisito para sacar pasaporte.
     //Este requisito es que el viajero haya realizado por lo menos un viaje.
     public boolean haViajado() {
@@ -140,10 +173,10 @@ public class Viajero extends Persona implements Consumidor {
             return true;
         }
     }
-    
+
     //Método que se invoca cuando el viajero quiere redimir millas.
     public void redimirMillas() {
-        this.setPresupuesto(this.presupuesto + this.millas);
+        this.setPresupuesto(this.presupuesto + (this.millas) * 10);
         this.setMillas(0);
     }
 

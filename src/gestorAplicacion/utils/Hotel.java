@@ -4,6 +4,7 @@ import gestorAplicacion.utils.Destino;
 import gestorAplicacion.persons.Viajero;
 import gestorAplicacion.persons.Viajero;
 import java.util.*;
+import uiMain.Main;
 
 public class Hotel {
 
@@ -41,8 +42,28 @@ public class Hotel {
         }
         return hotel;
     }
-    
-    
+
+    /*
+    Este método determina si el Viajero puede pagar aunque sea un hotel que esté en el destino ingresado.
+    Esto con la intención de saber cuando le podría costar la estadía, para saber si puede pagarla o no.
+    Si no pudiera pagar ni lo más barato, entonces no podría reservar hotel con SAM-TRAVEL, aunque solo
+    compraría tiquete de transporte.
+     */
+    public static Boolean minimoDeEstadia(Viajero v, Destino d) {
+        boolean puedePagarNoche = false;
+        for (Hotel h : d.getHoteles()) {
+            if (v.getPresupuesto() >= h.getCosto()) {
+                puedePagarNoche = true;
+            }
+        }
+        return puedePagarNoche;
+    }
+
+    public String imprimirDatos() {
+        String txt = Main.t.imprimirHotel(this);
+        return txt;
+    }
+
     //GETTERS AND SETTERS
     public String getNombre() {
         return nombre;

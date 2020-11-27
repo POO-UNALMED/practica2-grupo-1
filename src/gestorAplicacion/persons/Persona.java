@@ -14,6 +14,7 @@ public abstract class Persona {
         this.nombre = nombre;
         this.visado = visado;
         listaPersonas.add(this);
+
     }
 
     public Persona() {
@@ -22,25 +23,22 @@ public abstract class Persona {
 
     // METODOS ABSTRACT: Método que se herederán en las clases hijas Viajero y Agente.
     public abstract void obtenerVisado();
-    
+
     public abstract void retirarse();
-    
+
     //MÉTODOS
-    
     //Verifica si hay alguna persona con el mismo numero de cedula que se ingresa.
-    public static boolean verificarCedula(int cedulaEntrante){
+    public static boolean verificarCedula(int cedulaEntrante) {
         boolean disponible = false;
-        for (Persona p : listaPersonas){
-            if(p.getCedula() == cedulaEntrante){
+        for (Persona p : listaPersonas) {
+            if (p.getCedula() == cedulaEntrante) {
                 disponible = true;
             }
         }
         return disponible;
     }
-    
 
     // GETTERS AND SETTERS
-
     public int getCedula() {
         return cedula;
     }

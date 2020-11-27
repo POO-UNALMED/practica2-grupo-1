@@ -5,6 +5,7 @@ import gestorAplicacion.utils.Destino;
 import gestorAplicacion.persons.Viajero;
 import gestorAplicacion.persons.Viajero;
 import java.util.ArrayList;
+import uiMain.Main;
 
 public class Tiquete {
 
@@ -15,7 +16,7 @@ public class Tiquete {
     private int diasEstadia;
     private Destino destino;
     private Hotel hotel;
-    private double precio;
+    private int precio;
     private static ArrayList<Tiquete> viajesRealizados = new ArrayList<>();
     
     //Aquí se puede evidenciar el uso de dos diferentes constructores de una clase.
@@ -68,6 +69,11 @@ public class Tiquete {
         int costoTransporte = t.getPrecio();
         precio = costoTransporte;
         return precio;
+    }
+    
+    public String imprimirDatos(){
+        String datos = Main.t.imprimirTiquete(this);
+        return datos;
     }
     
     //GETTERS AND SETTERS
@@ -127,11 +133,11 @@ public class Tiquete {
         this.hotel = hotel;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 

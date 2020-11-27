@@ -26,10 +26,13 @@ public class Cursor implements EventHandler<MouseEvent> {
     static int noFoto = 1;
 
     @Override
+    //Aca creamos una clase que se va a encargar de manejar varios eventos
     public void handle(MouseEvent m) {
-
+        
+        //Con esto capturamos el evento
         Object comando = m.getSource();
-
+        
+        //Este evento lo que hace es que cada vez que se pasa sobre la region p4 cambia la foto 
         if ((comando instanceof ImageView)) {
 
             Image imagen;
@@ -54,6 +57,9 @@ public class Cursor implements EventHandler<MouseEvent> {
             Start.p4.getChildren().clear();
             Start.p4.getChildren().addAll(Start.marcoP4, Start.bInicio);
         }
+        
+        /*Este evento lo que hace es que verificar que se de click sobre una region VBox la cual tenga nombre p5, si es asi cada vez que se da click en esa region
+        cambia de hoja de vida y ademas cambia las fotos de la region p6*/
         if (comando instanceof VBox) {
             if (comando.equals(Start.p5) && Start.p5.getChildren().get(0) == Start.hdv1) {                
                 Start.p5.getChildren().clear();   

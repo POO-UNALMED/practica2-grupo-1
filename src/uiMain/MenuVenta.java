@@ -39,8 +39,10 @@ import uiMain.utils.BarraMenu;
 import uiMain.utils.FieldPane;
 import uiMain.utils.FieldPane;
 
+//Aca se crea el diseño del menu venta
 public class MenuVenta {
 
+    
     public static Scene scena;
     public static Stage window;
     public static BorderPane marco;

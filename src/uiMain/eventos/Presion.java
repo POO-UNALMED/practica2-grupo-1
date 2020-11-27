@@ -32,8 +32,10 @@ public class Presion implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent e) {
         
+        //Asi capturamos el evento
         Object comando = e.getSource();
         
+        //Aca verificamos sobre que boton se esta haciendo click, y dependiendo del boton sobre el que se haga click muestra determinada informacion
         if (comando instanceof MenuItem) {
             MenuItem item = (MenuItem) comando;
             if (item.equals(Start.menuSalir)) {
@@ -79,6 +81,7 @@ public class Presion implements EventHandler<ActionEvent> {
 
     }
 
+    //Esta ventana se muestra cuando un usuario da click sobre el boton viajeros
     public void imprimirViajeros() {
         String impresion = "";
         for (Viajero v : Viajero.getListaViajeros()) {
@@ -96,6 +99,7 @@ public class Presion implements EventHandler<ActionEvent> {
         dialog.showAndWait();
     }
 
+    //Esta ventana se muestra cuando un usuario da click sobre el boton agentes
     public void imprimirAgentes() {
         String impresion = "";
         for (Agente a : Agente.getListaAgentes()) {
@@ -113,6 +117,7 @@ public class Presion implements EventHandler<ActionEvent> {
         dialog.showAndWait();
     }
 
+    //Esta ventana se muestra cuando un usuario da click sobre el boton Destino
     public void imprimirDestinos() {
         String impresion = "";
         for (Destino d : Destino.getListaDestinos()) {

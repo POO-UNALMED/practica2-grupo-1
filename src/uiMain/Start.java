@@ -58,6 +58,7 @@ public class Start {
     public static ImageView marcoP4;
     public static Image imageP4;
 
+    //Objetos P5
     public static VBox p5;
     public static Label hdv1;
     public static Label hdv2;

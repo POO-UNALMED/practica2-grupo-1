@@ -38,6 +38,7 @@ public class Agente extends Persona {
         this.listaClientes.add(viajero);
     }
 
+    //Este metodo verifica que la cedula no se encuentre registrada en el sistema
     public static boolean verificarCedula(int cedula) {
         int contador = 0;
         for (Agente a : listaAgentes) {
@@ -54,6 +55,7 @@ public class Agente extends Persona {
         }
     }
 
+    
     public static Persona devolverPorCedula(int cedula) {
         Agente agenteActual = null;
         for (Agente a : listaAgentes) {
@@ -64,6 +66,7 @@ public class Agente extends Persona {
         return agenteActual;
     }
 
+    //Este metodo asigna un agente aleatorio al usuario
     public static Agente agenteAleatorio() {
         Agente agenteAsignado = Agente.getListaAgentes().get(0);
         int numeroAleatorio = (int) Math.floor(Math.random() * Agente.numeroAgentes());
@@ -71,15 +74,19 @@ public class Agente extends Persona {
         return agenteAsignado;
     }
 
+    //Retorna el numero de agentes que hay
     public static int numeroAgentes() {
         return Agente.getListaAgentes().size();
     }
 
+    
+    //Muestar el agente creado
     public String imprimirDatos() {
         String txt = Main.t.imprimirAgente(this);
         return txt;
     }
 
+    //Asi obtenemos una lista donde nos ordena los agentes por numero de ventas de mayor a menor 
     public static List<Entry<String, Integer>> mejoresAgentes() {
         HashMap<String, Integer> agentes = new HashMap<>();
 
@@ -97,6 +104,7 @@ public class Agente extends Persona {
         return list;
     }
 
+    //Asi verificamos si un agente existe
     public static Agente existeAgente(int cedula) {
         for (Agente agente : listaAgentes) {
             if (agente.getCedula() == (cedula)) {
@@ -106,6 +114,7 @@ public class Agente extends Persona {
         return null;
     }
 
+    //Este metodo dice la comision que un agente que se ha ganado
     public static double comision(String nombre) {
         for (Agente agente : listaAgentes) {
             if (agente.getNombre().equals(nombre)) {
@@ -116,6 +125,7 @@ public class Agente extends Persona {
         return 0;
     }
 
+    //Mira si existe un agente con la cedula dada, retorna true si existe de lo contrario retorna false
     public static boolean buscarCedula(int cedula) {
         for (Agente agente : listaAgentes) {
             if (agente.getCedula() == cedula) {
@@ -125,6 +135,7 @@ public class Agente extends Persona {
         return false;
     }
 
+    //Asi encontramos el valor de la comision que le toca al usuario
     public void comisionar(int total) {
         setComision((int) (total * pComision));
     }

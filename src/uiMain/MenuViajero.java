@@ -43,6 +43,8 @@ import uiMain.utils.BarraMenu;
 import uiMain.utils.FieldPane;
 import uiMain.utils.FieldPane;
 
+
+//En esta clase se creara todo el diseño de la ventana viajero
 public class MenuViajero {
 
     static Scene scena;
@@ -74,9 +76,12 @@ public class MenuViajero {
     String[] tituloCriterios;
     String[] tipoCriterios;
     String imp2;
-
+    
+    
+    //Aca creamos el menu viajero el cual es llamado cuando se presiona sobre el boton viajero
     public MenuViajero() {
 
+        
         inicializarDatos();
         formulario = new FieldPane(tituloCriterios, tipoCriterios);
         barraMenu = new BarraMenu().getMenu();
@@ -89,6 +94,7 @@ public class MenuViajero {
         scena = new Scene(marco, 600, 600);
     }
 
+    //Esta es una sobrecarga del metodo menu viajero que se llama cuando se le pasa como argumento un viajero
     public MenuViajero(Viajero v) {
         Main.window.setTitle(" Usuario:  " + v.getNombre());
         inicializarDatos();
@@ -114,6 +120,8 @@ public class MenuViajero {
 
     }
 
+    
+    //Aca creamos los objetos que van dentro del menu viajero y tambien creamos varios eventos dependiendo sobre que boton se de click   
     public void inicializarDatos() {
 
         tituloCriterios = new String[]{"Cedula", "Nombre", "¿Tiene visado?  "};
@@ -272,7 +280,9 @@ public class MenuViajero {
     public Scene getEscena() {
         return scena;
     }
-
+    
+    
+    //aca tratamos de cotizar el valor del viaje, en caso de que suceda cualquier error pasara inmediatamanete el cath que coge cualquier error que se pueda presentar
     public void cotizarViaje(Viajero v) {
 
         try {
